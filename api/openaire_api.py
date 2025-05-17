@@ -1,6 +1,6 @@
 import requests
 import xml.etree.ElementTree as ET
-from models.base_models import Paper, Author
+from models.base_models import Paper, Author, Organizacion
 
 def parsear_xml_openaire(xml_data):
     try:
@@ -88,6 +88,70 @@ def parsear_xml_openaire(xml_data):
         print(f"Error al parsear XML: {e}")
         return None
 
+def parsear_xml_organizacion_openaire(xml_data):
+    try:
+        root = ET.fromstring(xml_data)
+        organizaciones = []
+
+        # Buscar todas las organizaciones en el XML
+        for org_elem in root.findall('.//organization'):
+            # Extraer información básica
+            nombre = None
+            lugar = None
+            rdftype = None
+            trabajos = None
+            links = None
+
+            # Nombre de la organización
+            name_elem = org_elem.find('.//name')
+            if name_elem is not None and name_elem.text:
+                nombre = name_elem.text.strip()
+
+            # Lugar/País
+            country_elem = org_elem.find('.//country')
+            if country_elem is not None and country_elem.text:
+                lugar = country_elem.text.strip()
+
+            # RDF Type
+            type_elem = org_elem.find('.//type')
+            if type_elem is not None and type_elem.text:
+                rdftype = type_elem.text.strip()
+
+            # Trabajos/Proyectos
+            projects_elem = org_elem.find('.//projects')
+            if projects_elem is not None and projects_elem.text:
+                trabajos = projects_elem.text.strip()
+
+            # Links/Identificadores
+            links_elem = org_elem.find('.//pid')
+            if links_elem is not None and links_elem.text:
+                links = links_elem.text.strip()
+
+            # Crear objeto Organizacion
+            organizacion = Organizacion(
+                nombre=nombre,
+                lugar=lugar,
+                rdftype=rdftype,
+                trabajos=trabajos,
+                links=links
+            )
+            organizaciones.append(organizacion)
+
+        if organizaciones:
+            print("\n--- Resultados de la búsqueda de organizaciones ---")
+            for i, org in enumerate(organizaciones, 1):
+                print(f"\nOrganización {i}:")
+                org.mostrar_info()
+            print("--- Fin de los resultados ---\n")
+            return organizaciones
+        else:
+            print("No se encontraron organizaciones en los resultados.")
+            return None
+
+    except ET.ParseError as e:
+        print(f"Error al parsear XML: {e}")
+        return None
+
 def buscar_por_titulo(titulo):
     try:
         print(f"\n Buscando en OpenAIRE: {titulo}\n")
@@ -100,4 +164,28 @@ def buscar_por_titulo(titulo):
             return None
     except Exception as e:
         print(f"Error al consultar OpenAIRE para '{titulo}': {e}")
+        return None
+
+def buscar_organizacion(nombre):
+    """
+    Busca organizaciones en OpenAIRE por nombre.
+    
+    Args:
+        nombre (str): Nombre de la organización a buscar
+        
+    Returns:
+        list: Lista de objetos Organizacion encontrados, o None si hay error
+    """
+    try:
+        print(f"\nBuscando organización en OpenAIRE: {nombre}\n")
+        api_url = f"https://api.openaire.eu/search/organizations?name={nombre}&format=xml"
+        response = requests.get(api_url, timeout=10)
+        
+        if response.status_code == 200:
+            return parsear_xml_organizacion_openaire(response.text)
+        else:
+            print(f"Error al consultar OpenAIRE (Error {response.status_code})")
+            return None
+    except Exception as e:
+        print(f"Error al consultar OpenAIRE para la organización '{nombre}': {e}")
         return None 
