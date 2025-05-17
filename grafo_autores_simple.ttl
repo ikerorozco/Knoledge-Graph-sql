@@ -1,0 +1,37 @@
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix fin: <http://www.owl-ontologies.com/financiamiento#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.org/paper/9761a43b-489c-467a-8887-2a617a2538d9> a fin:Paper ;
+    dc:title "Quality over Quantity: Boosting Data Efficiency Through Ensembled Multimodal Data Curation"@es ;
+    fin:hasAuthor <http://example.org/author/Daming_Wang>,
+        <http://example.org/author/Jinda_Xu>,
+        <http://example.org/author/Minghua_Chen>,
+        <http://example.org/author/Weiwei_Zhao>,
+        <http://example.org/author/Yuhao_Song> .
+
+<http://example.org/author/Daming_Wang> a fin:Author ;
+    dc:title "Daming Wang" ;
+    fin:publicationCount 10 ;
+    fin:worksFor "DEStech Publications" .
+
+<http://example.org/author/Jinda_Xu> a fin:Author ;
+    dc:title "Jinda Xu" ;
+    fin:publicationCount 6 ;
+    fin:worksFor "IEEE" .
+
+<http://example.org/author/Minghua_Chen> a fin:Author ;
+    dc:title "Minghua Chen" ;
+    fin:publicationCount 10 ;
+    fin:worksFor "IEEE" .
+
+<http://example.org/author/Weiwei_Zhao> a fin:Author ;
+    dc:title "Weiwei Zhao" ;
+    fin:publicationCount 10 ;
+    fin:worksFor "IntechOpen" .
+
+<http://example.org/author/Yuhao_Song> a fin:Author ;
+    dc:title "Yuhao Song" ;
+    fin:publicationCount 10 ;
+    fin:worksFor "American Meteorological Society" .
+
