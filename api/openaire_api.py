@@ -88,48 +88,25 @@ def parsear_xml_openaire(xml_data):
         print(f"Error al parsear XML: {e}")
         return None
 
-def parsear_xml_organizacion_openaire(xml_data):
+def parsear_json_organizacion_openaire(json_data):
     try:
-        root = ET.fromstring(xml_data)
         organizaciones = []
+        resultados = json_data.get("results", [])
 
-        # Buscar todas las organizaciones en el XML
-        for org_elem in root.findall('.//organization'):
+        for org_data in resultados:
             # Extraer información básica
-            nombre = None
-            lugar = None
-            rdftype = None
-            trabajos = None
-            links = None
-
-            # Nombre de la organización
-            name_elem = org_elem.find('.//name')
-            if name_elem is not None and name_elem.text:
-                nombre = name_elem.text.strip()
-
-            # Lugar/País
-            country_elem = org_elem.find('.//country')
-            if country_elem is not None and country_elem.text:
-                lugar = country_elem.text.strip()
-
-            # RDF Type
-            type_elem = org_elem.find('.//type')
-            if type_elem is not None and type_elem.text:
-                rdftype = type_elem.text.strip()
-
-            # Trabajos/Proyectos
-            projects_elem = org_elem.find('.//projects')
-            if projects_elem is not None and projects_elem.text:
-                trabajos = projects_elem.text.strip()
-
-            # Links/Identificadores
-            links_elem = org_elem.find('.//pid')
-            if links_elem is not None and links_elem.text:
-                links = links_elem.text.strip()
+            nombre = org_data.get("legalName")
+            nombre_corto = org_data.get("legalShortName")
+            lugar = org_data.get("country", {}).get("label")
+            rdftype = "Organization"  # Tipo por defecto
+            trabajos = None  # No disponible en la nueva API
+            links = org_data.get("websiteUrl")
+            id_org = org_data.get("id")
+            nombres_alternativos = org_data.get("alternativeNames", [])
 
             # Crear objeto Organizacion
             organizacion = Organizacion(
-                nombre=nombre,
+                nombre=nombre or nombre_corto,
                 lugar=lugar,
                 rdftype=rdftype,
                 trabajos=trabajos,
@@ -139,17 +116,22 @@ def parsear_xml_organizacion_openaire(xml_data):
 
         if organizaciones:
             print("\n--- Resultados de la búsqueda de organizaciones ---")
+            print(f"Total de resultados encontrados: {json_data.get('header', {}).get('numFound', 0)}")
             for i, org in enumerate(organizaciones, 1):
                 print(f"\nOrganización {i}:")
                 org.mostrar_info()
+                if nombres_alternativos:
+                    print(f"  Nombres alternativos: {', '.join(nombres_alternativos)}")
+                if id_org:
+                    print(f"  ID: {id_org}")
             print("--- Fin de los resultados ---\n")
             return organizaciones
         else:
             print("No se encontraron organizaciones en los resultados.")
             return None
 
-    except ET.ParseError as e:
-        print(f"Error al parsear XML: {e}")
+    except Exception as e:
+        print(f"Error al procesar JSON: {e}")
         return None
 
 def buscar_por_titulo(titulo):
@@ -166,23 +148,32 @@ def buscar_por_titulo(titulo):
         print(f"Error al consultar OpenAIRE para '{titulo}': {e}")
         return None
 
-def buscar_organizacion(nombre):
+def buscar_organizacion(nombre, pagina=1, resultados_por_pagina=10):
     """
-    Busca organizaciones en OpenAIRE por nombre.
+    Busca organizaciones en OpenAIRE Graph API por nombre.
     
     Args:
         nombre (str): Nombre de la organización a buscar
+        pagina (int): Número de página de resultados
+        resultados_por_pagina (int): Cantidad de resultados por página
         
     Returns:
         list: Lista de objetos Organizacion encontrados, o None si hay error
     """
     try:
         print(f"\nBuscando organización en OpenAIRE: {nombre}\n")
-        api_url = f"https://api.openaire.eu/search/organizations?name={nombre}&format=xml"
-        response = requests.get(api_url, timeout=10)
+        api_url = f"https://api.openaire.eu/graph/v1/organizations"
+        params = {
+            "search": nombre,
+            "page": pagina,
+            "pageSize": resultados_por_pagina,
+            "sortBy": "relevance DESC"
+        }
+        
+        response = requests.get(api_url, params=params, timeout=10)
         
         if response.status_code == 200:
-            return parsear_xml_organizacion_openaire(response.text)
+            return parsear_json_organizacion_openaire(response.json())
         else:
             print(f"Error al consultar OpenAIRE (Error {response.status_code})")
             return None

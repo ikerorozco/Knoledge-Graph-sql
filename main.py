@@ -1,4 +1,5 @@
-from api.openaire_api import buscar_por_titulo as buscar_openaire, buscar_organizacion
+from api.openaire_api import buscar_por_titulo as buscar_openaire
+from api.openaire_api import buscar_organizacion
 from api.openalex_api import buscar_por_titulo_openalex
 
 def buscar_paper(titulo):
@@ -17,15 +18,17 @@ def buscar_paper(titulo):
     
     return paper_openaire, paper_openalex
 
-def buscar_org(nombre):
+def buscar_org(nombre, pagina=1, resultados_por_pagina=10):
     """
     Busca una organización en OpenAIRE.
     
     Args:
         nombre (str): Nombre de la organización a buscar
+        pagina (int): Número de página de resultados
+        resultados_por_pagina (int): Cantidad de resultados por página
     """
     print(f"\nBuscando organización: {nombre}")
-    return buscar_organizacion(nombre)
+    return buscar_organizacion(nombre, pagina, resultados_por_pagina)
 
 if __name__ == "__main__":
     # Ejemplo de uso para papers
@@ -33,5 +36,6 @@ if __name__ == "__main__":
     buscar_paper(titulo)
     
     # Ejemplo de uso para organizaciones
-    nombre_org = "Universidad de Granada"
-    buscar_org(nombre_org)
+    nombre_org = "Complutense"
+    # Buscar primera página con 5 resultados
+    buscar_org(nombre_org, pagina=1, resultados_por_pagina=5)
