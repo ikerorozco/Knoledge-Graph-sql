@@ -1,7 +1,7 @@
 from api.openaire_api import buscar_por_titulo as buscar_openaire
 from api.openaire_api import buscar_organizacion
 from api.openalex_api import buscar_por_titulo_openalex
-from extractors.grobid_extractor import process_pdf
+from extractors.grobid_extractor import get_all_pdf_data
 
 def buscar_paper(titulo):
     """
@@ -40,3 +40,6 @@ if __name__ == "__main__":
     nombre_org = "Complutense"
     # Buscar primera página con 5 resultados
     buscar_org(nombre_org, pagina=1, resultados_por_pagina=5)
+
+    # Ejecutar el extractor Grobid
+    get_all_pdf_data()
