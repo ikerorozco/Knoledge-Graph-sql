@@ -34,12 +34,12 @@ def buscar_org(nombre, pagina=1, resultados_por_pagina=10):
 if __name__ == "__main__":
     # Ejemplo de uso para papers
     titulo = "Quality over Quantity: Boosting Data Efficiency Through Ensembled Multimodal Data Curation"
-    buscar_paper(titulo)
+    #buscar_paper(titulo)
     
     # Ejemplo de uso para organizaciones
     nombre_org = "Complutense"
     # Buscar primera página con 5 resultados
-    buscar_org(nombre_org, pagina=1, resultados_por_pagina=5)
+    #buscar_org(nombre_org, pagina=1, resultados_por_pagina=5)
 
     # Ejecutar el extractor Grobid
-    get_all_pdf_data()
+    print(get_all_pdf_data())
