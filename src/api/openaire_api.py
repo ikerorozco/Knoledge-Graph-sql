@@ -1,6 +1,8 @@
 import requests
 import xml.etree.ElementTree as ET
-from models.base_models import Paper, Author, Organizacion
+from models.author import Author
+from models.paper import Paper
+from models.organization import Organization
 
 def parsear_xml_openaire(xml_data):
     try:
@@ -105,7 +107,7 @@ def parsear_json_organizacion_openaire(json_data):
             nombres_alternativos = org_data.get("alternativeNames", [])
 
             # Crear objeto Organizacion
-            organizacion = Organizacion(
+            organizacion = Organization(
                 nombre=nombre or nombre_corto,
                 lugar=lugar,
                 rdftype=rdftype,

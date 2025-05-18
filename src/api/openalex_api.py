@@ -1,5 +1,7 @@
 import requests
-from models.base_models import Paper, Author, Organizacion
+from models.paper import Paper
+from models.author import Author
+from models.organization import Organization
 
 def buscar_por_titulo_openalex(titulo):
     try:
@@ -53,7 +55,7 @@ def buscar_por_titulo_openalex(titulo):
                             org_trabajos = inst_data.get("works_count", 0)
                             org_links = inst_data.get("id")
 
-                            organizacion = Organizacion(
+                            organizacion = Organization(
                                 nombre=org_nombre,
                                 lugar=org_lugar,
                                 rdftype=org_rdf_type,

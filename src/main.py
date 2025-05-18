@@ -1,6 +1,7 @@
 from api.openaire_api import buscar_por_titulo as buscar_openaire
 from api.openaire_api import buscar_organizacion
 from api.openalex_api import buscar_por_titulo_openalex
+from extractors.grobid_extractor import process_pdf
 
 def buscar_paper(titulo):
     """
