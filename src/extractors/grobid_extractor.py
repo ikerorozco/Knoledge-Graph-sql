@@ -8,7 +8,7 @@ sys.stdout.reconfigure(encoding='utf-8')
 
 # Argumentos de entrada
 parser = argparse.ArgumentParser(description="Extraer metadatos desde PDFs usando GROBID.")
-parser.add_argument("-i", "--input", default="data/raw", help="Carpeta que contiene los archivos PDF.")
+parser.add_argument("-i", "--input", default="data", help="Carpeta que contiene los archivos PDF.")
 args = parser.parse_args()
 PDF_DIRECTORY = args.input
 
@@ -69,6 +69,9 @@ def Grobid_extract_acknowledgment(root):
             ack_texts.append(text.strip())
     return " ".join(ack_texts).strip()
 
+# Lista para almacenar los datos de todos los PDFs
+all_pdf_data = []
+
 # Procesar los archivos PDF
 pdf_files = [f for f in os.listdir(PDF_DIRECTORY) if f.lower().endswith(".pdf")]
 if not pdf_files:
@@ -88,24 +91,45 @@ for pdf in pdf_files:
 
     try:
         root = ET.fromstring(response.text)
-        title = Grobid_extract_title(root)
-        authors = Grobid_extract_authors(root)
-        organizations = Grobid_extract_organizations(root)
-        project = Grobid_extract_project(root)
-        page_count = Grobid_extract_page_count(root)
-        acknowledgment = Grobid_extract_acknowledgment(root)
-
+        
+        # Almacenar los datos en un diccionario
+        pdf_data = {
+            "filename": pdf,
+            "title": Grobid_extract_title(root),
+            "authors": Grobid_extract_authors(root),
+            "organizations": Grobid_extract_organizations(root),
+            "project": Grobid_extract_project(root),
+            "page_count": Grobid_extract_page_count(root),
+            "acknowledgment": Grobid_extract_acknowledgment(root)
+        }
+        
+        # Agregar el diccionario a la lista
+        all_pdf_data.append(pdf_data)
+        
+        # Opcional: Mostrar un resumen de los datos extraídos
+        print(f"     Título: {pdf_data['title']}")
+        print(f"     Autores: {', '.join(pdf_data['authors'])}")
+        print(f"     Organizaciones: {', '.join(pdf_data['organizations'])}")
+        print(f"     Páginas: {pdf_data['page_count']}")
 
     except ET.ParseError as e:
         print(f"     Error al analizar XML: {e}")
 
+# Funciones normalizadas que devuelven los datos de todos los PDFs
 def Grobid_extract_title_Normalizado():
-    return title
+    return [pdf_data["title"] for pdf_data in all_pdf_data]
+
 def Grobid_extract_authors_Normalizado():
-    return authors
+    return [pdf_data["authors"] for pdf_data in all_pdf_data]
+
 def Grobid_extract_organizations_Normalizado():
-    return organizations
+    return [pdf_data["organizations"] for pdf_data in all_pdf_data]
+
 def Grobid_extract_project_Normalizado():
-    return project
+    return [pdf_data["project"] for pdf_data in all_pdf_data]
+
 def Grobid_extract_page_count_Normalizado():
-    return page_count
+    return [pdf_data["page_count"] for pdf_data in all_pdf_data]
+
+def get_all_pdf_data():
+    return all_pdf_data
