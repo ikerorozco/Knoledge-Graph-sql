@@ -8,7 +8,7 @@ sys.stdout.reconfigure(encoding='utf-8')
 
 # Argumentos de entrada
 parser = argparse.ArgumentParser(description="Extraer metadatos desde PDFs usando GROBID.")
-parser.add_argument("-i", "--input", default="data", help="Carpeta que contiene los archivos PDF.")
+parser.add_argument("-i", "--input", default="data/raw", help="Carpeta que contiene los archivos PDF.")
 args = parser.parse_args()
 PDF_DIRECTORY = args.input
 
