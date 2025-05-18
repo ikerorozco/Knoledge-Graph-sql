@@ -12,6 +12,12 @@ parser.add_argument("-i", "--input", default="data/raw", help="Carpeta que conti
 args = parser.parse_args()
 PDF_DIRECTORY = args.input
 
+# Verificar si la ruta es relativa y convertirla a ruta absoluta basada en la raíz del proyecto
+if not os.path.isabs(PDF_DIRECTORY):
+    # Encontrar la raíz del proyecto (2 niveles hacia arriba desde este script)
+    project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    PDF_DIRECTORY = os.path.join(project_root, PDF_DIRECTORY)
+
 if not os.path.exists(PDF_DIRECTORY):
     print(f"La carpeta '{PDF_DIRECTORY}' no existe.")
     exit(1)
