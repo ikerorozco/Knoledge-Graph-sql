@@ -41,7 +41,3 @@ ENV/
 # OS specific files
 .DS_Store
 Thumbs.db
-
-# Project specific
-data/*
-!data/.gitkeep 
