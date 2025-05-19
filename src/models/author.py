@@ -49,4 +49,3 @@ class Author:
         print(f"  RDF Type       : {self.rdf_type or 'No disponible'}")
         print(f"  Profesión      : {self.profesion or 'No disponible'}")
         print(f"  Trabajos       : {self.trabajos or 'No disponible'}")
-        self.mostrar_campos_faltantes() 

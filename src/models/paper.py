@@ -1,5 +1,6 @@
 from typing import Optional, List
 from .author import Author
+from .organization import Organization
 
 
 class Paper:
@@ -8,7 +9,7 @@ class Paper:
     def __init__(self, title: str, doi: Optional[str], date: Optional[str],
                  idioma: Optional[str], veces_citado: Optional[int],
                  paginas: Optional[int], rdf_type: Optional[str],
-                 autores: List[Author]):
+                 autores: List[Author],organization: List[Organization]):
         """
         Inicializa un paper con sus atributos.
         
@@ -30,6 +31,7 @@ class Paper:
         self.paginas = paginas
         self.rdf_type = rdf_type
         self.autores = autores
+        self.organization = organization
         self.flags = {}
 
         self.set_flag('Title', title is not None)
@@ -50,13 +52,6 @@ class Paper:
         """
         self.flags[nombre] = valor
 
-    def mostrar_campos_faltantes(self) -> None:
-        """Muestra los campos que no están presentes en el modelo."""
-        print("\n Campos faltantes:")
-        for nombre, valor in self.flags.items():
-            if not valor:
-                print(f"   {nombre} no encontrado.")
-
     def mostrar_info(self) -> None:
         """Muestra la información del paper y sus autores."""
         print(" Información del Paper:")
@@ -67,10 +62,13 @@ class Paper:
         print(f"  Veces citado   : {self.veces_citado}")
         print(f"  Páginas        : {self.paginas}")
         print(f"  RDF Type       : {self.rdf_type}")
-        self.mostrar_campos_faltantes()
         print("\n")
 
         print(" Autores:")
         for autor in self.autores:
             autor.mostrar_info()
             print("\n") 
+        print(" Organizaciones:")
+        for org in self.organization:
+            org.mostrar_info()
+            print("\n")

@@ -1,7 +1,17 @@
 from api.openaire_api import buscar_por_titulo as buscar_openaire
-from api.openaire_api import buscar_organizacion
+from api.openaire_api import buscar_organizacion,completar_paper_con_api
 from api.openalex_api import buscar_por_titulo_openalex
-from extractors.grobid_extractor import get_all_pdf_data
+from extractors.grobid_extractor import (
+    Grobid_extract_title_Normalizado,
+    Grobid_extract_authors_Normalizado,
+    Grobid_extract_organizations_Normalizado,
+    Grobid_extract_project_Normalizado,
+    Grobid_extract_page_count_Normalizado,
+)
+from models.paper import Paper
+from models.author import Author
+from models.organization import Organization
+
 
 def buscar_paper(titulo):
     """
@@ -42,4 +52,39 @@ if __name__ == "__main__":
     #buscar_org(nombre_org, pagina=1, resultados_por_pagina=5)
 
     # Ejecutar el extractor Grobid
-    print(get_all_pdf_data())
+
+    # Obtener listas normalizadas
+    titles = Grobid_extract_title_Normalizado()
+    authors_list = Grobid_extract_authors_Normalizado()
+    organizations = Grobid_extract_organizations_Normalizado()
+    projects = Grobid_extract_project_Normalizado()
+    pages = Grobid_extract_page_count_Normalizado()
+
+    papers = []
+    for i in range(len(titles)):
+        # Crear objetos Author para cada autor (ajusta según tu modelo Author)
+        autores = [Author(nombre=nombre) for nombre in authors_list[i]]
+        
+
+        # Convierte cada string en objeto Organization
+        orgs_raw = organizations[i] if i < len(organizations) else []
+        if not isinstance(orgs_raw, list):
+            orgs_raw = [orgs_raw] if orgs_raw else []
+        orgs = [Organization(nombre=org, lugar=None, rdftype=None, trabajos=None, links=None) for org in orgs_raw]
+
+        paper = Paper(
+            title=titles[i],
+            doi=None,  # Ajusta si tienes este dato
+            date=None,
+            idioma=None,
+            veces_citado=None,
+            paginas=pages[i] if i < len(pages) else None,
+            rdf_type=None,
+            autores=autores,
+            organization=orgs,  # <-- coma y nombre correcto
+        )
+        papers.append(paper)
+
+    for paper in papers:
+        completar_paper_con_api(paper)
+        paper.mostrar_info()

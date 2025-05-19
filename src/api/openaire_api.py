@@ -78,7 +78,8 @@ def parsear_xml_openaire(xml_data):
             veces_citado=veces_citado,
             paginas=paginas,
             rdf_type=rdf_type,
-            autores=autores
+            autores=autores,
+            organization=[]  # <-- Agrega esto
         )
 
         print("\n--- Resultado de la búsqueda ---")
@@ -149,6 +150,105 @@ def buscar_por_titulo(titulo):
     except Exception as e:
         print(f"Error al consultar OpenAIRE para '{titulo}': {e}")
         return None
+    
+from api.openaire_api import buscar_por_titulo
+
+def buscar_autor_en_openaire(nombre_autor):
+    """
+    Busca un autor por nombre en OpenAIRE y devuelve un objeto Author si lo encuentra.
+    """
+    try:
+        api_url = f"https://api.openaire.eu/search/persons?title={nombre_autor}&format=xml"
+        response = requests.get(api_url, timeout=10)
+        if response.status_code == 200:
+            root = ET.fromstring(response.text)
+            creator = root.find('.//person')
+            if creator is not None:
+                nombre = creator.findtext('.//fullname') or creator.findtext('.//name')
+                rdf_type = creator.findtext('.//type')
+                profesion = creator.findtext('.//occupation')
+                trabajos = creator.findtext('.//affiliation')
+                return Author(
+                    nombre=nombre,
+                    rdf_type=rdf_type,
+                    profesion=profesion,
+                    trabajos=trabajos
+                )
+        return None
+    except Exception:
+        return None
+
+def completar_paper_con_api(paper):
+    """
+    Completa los campos vacíos de un objeto Paper usando la API de OpenAIRE.
+    Además, valida y completa los autores y organizaciones.
+    """
+    # Si todos los campos están completos, no hace nada
+    campos_faltantes = [
+        paper.doi, paper.date, paper.idioma, paper.veces_citado, paper.paginas, paper.rdf_type
+    ]
+    if all(campo not in [None, ""] for campo in campos_faltantes):
+        pass  # Puede haber autores/organizaciones incompletos
+
+    # Buscar información en la API usando el título
+    paper_api = buscar_por_titulo(paper.title)
+    if paper_api:
+        if not paper.doi:
+            paper.doi = paper_api.doi
+        if not paper.date:
+            paper.date = paper_api.date
+        if not paper.idioma:
+            paper.idioma = paper_api.idioma
+        if not paper.veces_citado:
+            paper.veces_citado = paper_api.veces_citado
+        if not paper.paginas:
+            paper.paginas = paper_api.paginas
+        if not paper.rdf_type:
+            paper.rdf_type = paper_api.rdf_type
+        if (not paper.autores or len(paper.autores) == 0) and hasattr(paper_api, "autores"):
+            paper.autores = paper_api.autores
+        if (not paper.organization or len(paper.organization) == 0) and hasattr(paper_api, "organization"):
+            paper.organization = paper_api.organization
+
+    # Validar y completar autores
+    autores_validados = []
+    for autor in paper.autores:
+        autor_completo = buscar_autor_en_openaire(autor.nombre)
+        if autor_completo:
+            if not autor.rdf_type:
+                autor.rdf_type = autor_completo.rdf_type
+            if not autor.profesion:
+                autor.profesion = autor_completo.profesion
+            if not autor.trabajos:
+                autor.trabajos = autor_completo.trabajos
+            autores_validados.append(autor)
+    paper.autores = autores_validados
+
+    # Validar y completar organizaciones
+    organizaciones_validadas = []
+    for org in getattr(paper, "organization", []):
+        # Si org es un string, conviértelo a Organization
+        if isinstance(org, str):
+            org_obj = Organization(nombre=org, lugar=None, rdftype=None, trabajos=None, links=None)
+        else:
+            org_obj = org
+
+        resultado = buscar_organizacion(org_obj.nombre)
+        if resultado and len(resultado) > 0:
+            org_api = resultado[0]
+            if not org_obj.lugar:
+                org_obj.lugar = org_api.lugar
+            if not org_obj.rdftype:
+                org_obj.rdftype = org_api.rdftype
+            if not org_obj.trabajos:
+                org_obj.trabajos = org_api.trabajos
+            if not org_obj.links:
+                org_obj.links = org_api.links
+        # Siempre agrega la organización, aunque no se haya actualizado
+        organizaciones_validadas.append(org_obj)
+    paper.organization = organizaciones_validadas
+
+    return paper
 
 def buscar_organizacion(nombre, pagina=1, resultados_por_pagina=10):
     """
@@ -181,4 +281,4 @@ def buscar_organizacion(nombre, pagina=1, resultados_por_pagina=10):
             return None
     except Exception as e:
         print(f"Error al consultar OpenAIRE para la organización '{nombre}': {e}")
-        return None 
+        return None
