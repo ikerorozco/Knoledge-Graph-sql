@@ -7,7 +7,7 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 		<fileDesc>
 			<titleStmt>
 				<title level="a" type="main">Quality over Quantity: Boosting Data Efficiency Through Ensembled Multimodal Data Curation</title>
-				<funder ref="#_NajuhaE">
+				<funder ref="#_2XQ8KJM">
 					<orgName type="full">China NSF</orgName>
 				</funder>
 			</titleStmt>
@@ -86,7 +86,7 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 		</fileDesc>
 		<encodingDesc>
 			<appInfo>
-				<application version="0.8.2" ident="GROBID" when="2025-05-20T14:34+0000">
+				<application version="0.8.2" ident="GROBID" when="2025-05-20T14:54+0000">
 					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
 					<label type="revision">a91ee48</label>
 					<label type="parameters">startPage=-1, endPage=-1, consolidateCitations=0, consolidateHeader=0, consolidateFunders=0, includeRawAffiliations=false, includeRawCitations=false, includeRawCopyrights=false, generateTeiIds=false, generateTeiCoordinates=[], sentenceSegmentation=false, flavor=null</label>
@@ -121,8 +121,8 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 <figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><figDesc>Algorithm 1: Search Optimization for LFs 1: Input: 2: Raw dataset D raw , Tiny-labeled dataset D tiny , Operator Op, Evaluation metrics M , Candidate LF Combinations LF sCombs, M * 6: for each LF s ∈ LF sCombs do 7: Convert weak supervision label matrix L M from LF s LabelModel on D tiny 10: if M (LF s) &gt; M * then 11: Update M * ← M (LF s) and LF s * ← LF s 12:</figDesc></figure>
 <figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Figure 6 :</head><label>6</label><figDesc>Figure 6: Composite Metric Validation with Repeated Experimental Downtasks Evaluations. The positive correlation indicates its capability to guide the tuning of the process.</figDesc><graphic coords="7,321.89,253.28,233.73,170.81" type="bitmap" /></figure>
 <figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><figDesc>Exploring the balance between quantity and performance. Approximately the top 40% samples by the Eco-Datum quality score after deduplication (around 3.5M) provides the best balance between quality and quantity,</figDesc></figure>
-<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>Figure 7 :</head><label>7</label><figDesc>Figure 7: Vary the filtered dataset quantity and compare the results of repeated experiments to find an optimal balance at 3.5M samples under EcoDatum curation sorting.</figDesc><graphic coords="10,319.50,54.00,238.07,272.01" type="bitmap" /></figure>
-<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head>Figure 8 :</head><label>8</label><figDesc>Figure 8: Quality Guided Deduplication Samples: Among each duplicated group, only the finely aligned image-text pairs are kept and left others to improve the overall distribution with maintaining cross-modal quality.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>Figure 7 :</head><label>7</label><figDesc>Figure 7: Vary the filtered dataset quantity and compare the results of repeated experiments to find an optimal balance at 3.5M samples under EcoDatum curation sorting.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head>Figure 8 :</head><label>8</label><figDesc>Figure 8: Quality Guided Deduplication Samples: Among each duplicated group, only the finely aligned image-text pairs are kept and left others to improve the overall distribution with maintaining cross-modal quality.</figDesc><graphic coords="10,319.50,54.00,238.07,272.01" type="bitmap" /></figure>
 <figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_6"><head>•</head><figDesc>Enhances Model Training: High-quality, well-aligned data leads to more accurate and robust models.• Maintains Dataset Diversity: By selectively keeping the best-aligned pairs, the method supports a diverse and balanced dataset, which is critical for generalizability.</figDesc></figure>
 <figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_7"><head>Figure 9 :</head><label>9</label><figDesc>Figure 9: Hard Bad Cases Mined by V-CLIP Operator</figDesc></figure>
 <figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_9"><head>Figure 10 :Figure 11 :</head><label>1011</label><figDesc>Figure 10: High alignment quality data detected by the Local Cross-Modal Feature Alignment Operator</figDesc></figure>
@@ -146,7 +146,7 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 <div><head>Acknowledgments</head><p>This work was supported in part by <rs type="funder">China NSF</rs> grant No. <rs type="grantNumber">62202297</rs> and in part by the <rs type="institution">Open Project Program of the Laboratory of Pinghu</rs>. The opinions, findings, conclusions, and recommendations expressed in this paper are those of the authors and do not necessarily reflect the views of the funding agencies or the government.</p></div>
 			</div>
 			<listOrg type="funding">
-				<org type="funding" xml:id="_NajuhaE">
+				<org type="funding" xml:id="_2XQ8KJM">
 					<idno type="grant-number">62202297</idno>
 				</org>
 			</listOrg>

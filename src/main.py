@@ -76,7 +76,6 @@ def crear_organizaciones(pdf_data_organizations):
 if __name__ == "__main__":
 
     all_pdf_data = grobid_extractor_main()
-    print(all_pdf_data[0])
     papers = []
     for pdf_data in all_pdf_data:
         paper = crear_paper(pdf_data['title'],pdf_data['authors'],pdf_data['organizations'])

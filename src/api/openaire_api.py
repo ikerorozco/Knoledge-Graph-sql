@@ -85,7 +85,7 @@ def parsear_xml_openaire(xml_data):
         # print("\n--- Resultado de la búsqueda ---")
         # paper.mostrar_info()
         # print("--- Fin del resultado ---\n")
-        # return paper
+        return paper
 
     except ET.ParseError as e:
         print(f"Error al parsear XML: {e}")
@@ -183,6 +183,7 @@ def completar_paper_con_api(paper):
     Completa los campos vacíos de un objeto Paper usando la API de OpenAIRE.
     Además, valida y completa los autores y organizaciones.
     """
+
     # Si todos los campos están completos, no hace nada
     campos_faltantes = [
         paper.doi, paper.date, paper.idioma, paper.veces_citado, paper.paginas, paper.rdf_type
@@ -251,7 +252,7 @@ def completar_paper_con_api(paper):
 
     return paper
 
-def buscar_organizacion(nombre, pagina=1, resultados_por_pagina=10):
+def buscar_organizacion(nombre, pagina=1, resultados_por_pagina=1):
     """
     Busca organizaciones en OpenAIRE Graph API por nombre.
     

@@ -65,11 +65,11 @@ class Paper:
         print(f"  RDF Type       : {self.rdf_type}")
         print("\n")
 
-        print(" Autores:")
-        for autor in self.autores:
-            autor.mostrar_info()
-            print("\n") 
-        print(" Organizaciones:")
-        for org in self.organization:
-            org.mostrar_info()
-            print("\n")
+        # print(" Autores:")
+        # for autor in self.autores:
+        #     autor.mostrar_info()
+        #     print("\n") 
+        # print(" Organizaciones:")
+        # for org in self.organization:
+        #     org.mostrar_info()
+        #     print("\n")
