@@ -5,8 +5,7 @@ from extractors.grobid_extractor import (
     Grobid_extract_title_Normalizado,
     Grobid_extract_authors_Normalizado,
     Grobid_extract_organizations_Normalizado,
-    Grobid_extract_project_Normalizado,
-    Grobid_extract_page_count_Normalizado,
+    main as grobid_extractor_main
 )
 from models.paper import Paper
 from models.author import Author
@@ -42,49 +41,7 @@ def buscar_org(nombre, pagina=1, resultados_por_pagina=10):
     return buscar_organizacion(nombre, pagina, resultados_por_pagina)
 
 if __name__ == "__main__":
-    # Ejemplo de uso para papers
-    titulo = "Quality over Quantity: Boosting Data Efficiency Through Ensembled Multimodal Data Curation"
-    #buscar_paper(titulo)
-    
-    # Ejemplo de uso para organizaciones
-    nombre_org = "Complutense"
-    # Buscar primera página con 5 resultados
-    #buscar_org(nombre_org, pagina=1, resultados_por_pagina=5)
 
-    # Ejecutar el extractor Grobid
+    all_pdf_data = grobid_extractor_main()
 
-    # Obtener listas normalizadas
-    titles = Grobid_extract_title_Normalizado()
-    authors_list = Grobid_extract_authors_Normalizado()
-    organizations = Grobid_extract_organizations_Normalizado()
-    projects = Grobid_extract_project_Normalizado()
-    pages = Grobid_extract_page_count_Normalizado()
-
-    papers = []
-    for i in range(len(titles)):
-        # Crear objetos Author para cada autor (ajusta según tu modelo Author)
-        autores = [Author(nombre=nombre) for nombre in authors_list[i]]
-        
-
-        # Convierte cada string en objeto Organization
-        orgs_raw = organizations[i] if i < len(organizations) else []
-        if not isinstance(orgs_raw, list):
-            orgs_raw = [orgs_raw] if orgs_raw else []
-        orgs = [Organization(nombre=org, lugar=None, rdftype=None, trabajos=None, links=None) for org in orgs_raw]
-
-        paper = Paper(
-            title=titles[i],
-            doi=None,  # Ajusta si tienes este dato
-            date=None,
-            idioma=None,
-            veces_citado=None,
-            paginas=pages[i] if i < len(pages) else None,
-            rdf_type=None,
-            autores=autores,
-            organization=orgs,  # <-- coma y nombre correcto
-        )
-        papers.append(paper)
-
-    for paper in papers:
-        completar_paper_con_api(paper)
-        paper.mostrar_info()
+    print(all_pdf_data)
