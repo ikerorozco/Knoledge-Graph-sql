@@ -6,22 +6,23 @@ from .organization import Organization
 class Paper:
     """Modelo que representa un paper académico."""
     
-    def __init__(self, title: str, doi: Optional[str], date: Optional[str],
-                 idioma: Optional[str], veces_citado: Optional[int],
-                 paginas: Optional[int], rdf_type: Optional[str],
-                 autores: List[Author],organization: List[Organization]):
+    def __init__(self, title: str, doi: Optional[str] = None, date: Optional[str] = None,
+                 idioma: Optional[str] = None, veces_citado: Optional[int] = None,
+                 paginas: Optional[int] = None, rdf_type: Optional[str] = None,
+                 autores: Optional[List[Author]] = None, organization: Optional[List[Organization]] = None):
         """
         Inicializa un paper con sus atributos.
         
         Args:
             title (str): Título del paper
-            doi (Optional[str]): DOI del paper
-            date (Optional[str]): Fecha de publicación
-            idioma (Optional[str]): Idioma del paper
-            veces_citado (Optional[int]): Número de citas
-            paginas (Optional[int]): Número de páginas
-            rdf_type (Optional[str]): Tipo RDF del paper
-            autores (List[Author]): Lista de autores
+            doi (Optional[str], optional): DOI del paper. Defaults to None.
+            date (Optional[str], optional): Fecha de publicación. Defaults to None.
+            idioma (Optional[str], optional): Idioma del paper. Defaults to None.
+            veces_citado (Optional[int], optional): Número de citas. Defaults to None.
+            paginas (Optional[int], optional): Número de páginas. Defaults to None.
+            rdf_type (Optional[str], optional): Tipo RDF del paper. Defaults to None.
+            autores (Optional[List[Author]], optional): Lista de autores. Defaults to None.
+            organization (Optional[List[Organization]], optional): Lista de organizaciones. Defaults to None.
         """
         self.title = title
         self.doi = doi
@@ -30,8 +31,8 @@ class Paper:
         self.veces_citado = veces_citado
         self.paginas = paginas
         self.rdf_type = rdf_type
-        self.autores = autores
-        self.organization = organization
+        self.autores = autores if autores is not None else []
+        self.organization = organization if organization is not None else []
         self.flags = {}
 
         self.set_flag('Title', title is not None)

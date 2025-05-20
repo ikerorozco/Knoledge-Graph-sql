@@ -10,9 +10,9 @@ class Author:
         
         Args:
             nombre (str): Nombre del autor
-            rdf_type (Optional[str]): Tipo RDF del autor
-            profesion (Optional[str]): Profesión del autor
-            trabajos (Optional[int]): Número de trabajos del autor
+            rdf_type (Optional[str], optional): Tipo RDF del autor. Defaults to None.
+            profesion (Optional[str], optional): Profesión del autor. Defaults to None.
+            trabajos (Optional[int], optional): Número de trabajos del autor. Defaults to None.
         """
         self.nombre = nombre
         self.rdf_type = rdf_type

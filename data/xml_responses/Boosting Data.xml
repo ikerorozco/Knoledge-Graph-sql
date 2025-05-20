@@ -7,7 +7,7 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 		<fileDesc>
 			<titleStmt>
 				<title level="a" type="main">Quality over Quantity: Boosting Data Efficiency Through Ensembled Multimodal Data Curation</title>
-				<funder ref="#_GV4nbWW">
+				<funder ref="#_NajuhaE">
 					<orgName type="full">China NSF</orgName>
 				</funder>
 			</titleStmt>
@@ -86,7 +86,7 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 		</fileDesc>
 		<encodingDesc>
 			<appInfo>
-				<application version="0.8.2" ident="GROBID" when="2025-05-20T13:02+0000">
+				<application version="0.8.2" ident="GROBID" when="2025-05-20T14:34+0000">
 					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
 					<label type="revision">a91ee48</label>
 					<label type="parameters">startPage=-1, endPage=-1, consolidateCitations=0, consolidateHeader=0, consolidateFunders=0, includeRawAffiliations=false, includeRawCitations=false, includeRawCopyrights=false, generateTeiIds=false, generateTeiCoordinates=[], sentenceSegmentation=false, flavor=null</label>
@@ -146,7 +146,7 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 <div><head>Acknowledgments</head><p>This work was supported in part by <rs type="funder">China NSF</rs> grant No. <rs type="grantNumber">62202297</rs> and in part by the <rs type="institution">Open Project Program of the Laboratory of Pinghu</rs>. The opinions, findings, conclusions, and recommendations expressed in this paper are those of the authors and do not necessarily reflect the views of the funding agencies or the government.</p></div>
 			</div>
 			<listOrg type="funding">
-				<org type="funding" xml:id="_GV4nbWW">
+				<org type="funding" xml:id="_NajuhaE">
 					<idno type="grant-number">62202297</idno>
 				</org>
 			</listOrg>

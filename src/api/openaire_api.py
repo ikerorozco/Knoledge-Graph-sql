@@ -82,10 +82,10 @@ def parsear_xml_openaire(xml_data):
             organization=[]  # <-- Agrega esto
         )
 
-        print("\n--- Resultado de la búsqueda ---")
-        paper.mostrar_info()
-        print("--- Fin del resultado ---\n")
-        return paper
+        # print("\n--- Resultado de la búsqueda ---")
+        # paper.mostrar_info()
+        # print("--- Fin del resultado ---\n")
+        # return paper
 
     except ET.ParseError as e:
         print(f"Error al parsear XML: {e}")
@@ -192,6 +192,7 @@ def completar_paper_con_api(paper):
 
     # Buscar información en la API usando el título
     paper_api = buscar_por_titulo(paper.title)
+
     if paper_api:
         if not paper.doi:
             paper.doi = paper_api.doi

@@ -3,23 +3,23 @@ from typing import Optional, List
 class Organization:
     """Modelo que representa una organización académica."""
     
-    def __init__(self, nombre: str, lugar: Optional[str], rdftype: Optional[str],
-                 trabajos: Optional[int], links: Optional[List[str]]):
+    def __init__(self, nombre: str, lugar: Optional[str] = None, rdftype: Optional[str] = None,
+                 trabajos: Optional[int] = None, links: Optional[List[str]] = None):
         """
         Inicializa una organización con sus atributos.
         
         Args:
             nombre (str): Nombre de la organización
-            lugar (Optional[str]): Ubicación de la organización
-            rdftype (Optional[str]): Tipo RDF de la organización
-            trabajos (Optional[int]): Número de trabajos asociados
-            links (Optional[List[str]]): Lista de enlaces relacionados
+            lugar (Optional[str], optional): Ubicación de la organización. Defaults to None.
+            rdftype (Optional[str], optional): Tipo RDF de la organización. Defaults to None.
+            trabajos (Optional[int], optional): Número de trabajos asociados. Defaults to None.
+            links (Optional[List[str]], optional): Lista de enlaces relacionados. Defaults to None.
         """
         self.nombre = nombre
         self.lugar = lugar
         self.rdftype = rdftype
         self.trabajos = trabajos
-        self.links = links
+        self.links = links if links is not None else []
         self.flags = {}
 
         self.set_flag('Nombre', nombre is not None)
