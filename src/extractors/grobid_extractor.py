@@ -3,6 +3,9 @@ import sys
 import argparse
 import requests
 import xml.etree.ElementTree as ET
+from sentence_transformers import SentenceTransformer
+from sklearn.metrics.pairwise import cosine_similarity
+import numpy as np
 
 sys.stdout.reconfigure(encoding='utf-8')
 
@@ -45,6 +48,12 @@ def Grobid_extract_acknowledgment(root):
         if text:
             ack_texts.append(text.strip())
     return " ".join(ack_texts).strip()
+
+def Grobid_extract_abstract(root):
+    abstract_el = root.find(".//tei:abstract", namespaces)
+    if abstract_el is not None:
+        return " ".join(abstract_el.itertext()).strip()
+    return ""
 
 # Lista para almacenar los datos de todos los PDFs
 all_pdf_data = []
@@ -110,7 +119,8 @@ def process_pdfs(pdf_directory="data/raw", grobid_url="http://localhost:8070/api
                 "title": Grobid_extract_title(root),
                 "authors": Grobid_extract_authors(root),
                 "organizations": Grobid_extract_organizations(root),
-                "acknowledgment": Grobid_extract_acknowledgment(root)
+                "acknowledgment": Grobid_extract_acknowledgment(root),
+                "abstract": Grobid_extract_abstract(root)
             }
             
             # Agregar el diccionario a la lista
@@ -121,6 +131,7 @@ def process_pdfs(pdf_directory="data/raw", grobid_url="http://localhost:8070/api
             print(f"     # Autores: {len(pdf_data['authors'])}")
             print(f"     Organizaciones: {', '.join(pdf_data['organizations'])}")
             print(f"     Agradecimientos: {pdf_data['acknowledgment']}")
+            print(f"     Resumen: {pdf_data['abstract']}")
 
         except ET.ParseError as e:
             print(f"     Error al analizar XML: {e}")
@@ -140,6 +151,31 @@ def Grobid_extract_organizations_Normalizado():
 
 def get_all_pdf_data():
     return all_pdf_data
+
+
+def generar_embeddings_y_similitud(pdfs_extraidos, papers_objetos=None, umbral=0.7):
+    abstracts = [pdf["abstract"] for pdf in pdfs_extraidos]
+    nombres_pdf = [pdf["filename"] for pdf in pdfs_extraidos]
+
+    modelo = SentenceTransformer('all-MiniLM-L6-v2')
+    embeddings = modelo.encode(abstracts)
+    matriz_similitud = cosine_similarity(embeddings)
+
+    print("\n Matriz de similitud entre abstracts:")
+    print("      " + "  ".join(f"{name[:6]}" for name in nombres_pdf))
+    for i, row in enumerate(matriz_similitud):
+        print(f"{nombres_pdf[i][:6]}: " + "  ".join(f"{sim:.2f}" for sim in row))
+
+    print("\n Pares de PDFs más similares:")
+    for i in range(len(matriz_similitud)):
+        for j in range(i + 1, len(matriz_similitud)):
+            if matriz_similitud[i][j] > umbral:
+                print(f" - {nombres_pdf[i]} y {nombres_pdf[j]} → similitud: {matriz_similitud[i][j]:.2f}")
+                # Si tienes la lista de objetos Paper, agrega los parecidos
+                if papers_objetos:
+                    papers_objetos[i].agregar_parecido(papers_objetos[j])
+                    papers_objetos[j].agregar_parecido(papers_objetos[i])
+
 
 def main():
     """Función principal que ejecuta la extracción de datos de PDFs"""

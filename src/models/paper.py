@@ -34,6 +34,7 @@ class Paper:
         self.autores = autores if autores is not None else []
         self.organization = organization if organization is not None else []
         self.flags = {}
+        self.parecido: List["Paper"] = []  # <-- Nuevo atributo para papers parecidos
 
         self.set_flag('Title', title is not None)
         self.set_flag('Doi', doi is not None)
@@ -73,3 +74,7 @@ class Paper:
         # for org in self.organization:
         #     org.mostrar_info()
         #     print("\n")
+
+    def agregar_parecido(self, paper: "Paper") -> None:
+        """Agrega un paper a la lista de parecidos."""
+        self.parecido.append(paper)
