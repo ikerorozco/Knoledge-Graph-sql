@@ -1,6 +1,6 @@
 from api.openaire_api import buscar_por_titulo as buscar_openaire
 from api.openaire_api import buscar_organizacion,completar_paper_con_api
-from api.openalex_api import buscar_por_titulo_openalex
+from api.openalex_api import buscar_por_titulo_openalex, obtener_instituciones_por_openalex_id,obtener_openalex_id_por_titulo
 from extractors.grobid_extractor import (
     main as grobid_extractor_main,
     generar_embeddings_y_similitud,
@@ -78,13 +78,22 @@ def crear_organizaciones(pdf_data_organizations):
 
 if __name__ == "__main__":
 
+    
+
     all_pdf_data = grobid_extractor_main()
     papers = []
     for pdf_data in all_pdf_data:
         paper = crear_paper(pdf_data['title'], pdf_data['authors'], pdf_data['organizations'])
         papers.append(paper)
         
+    for paper in papers:
+        openalex_id = obtener_openalex_id_por_titulo(paper.title)
+        print(f"ID de OpenAlex para {paper.title}: {openalex_id}")
+        organizaciones = obtener_instituciones_por_openalex_id(openalex_id)
+        print(f"Organizaciones encontradas para {paper.title}: {organizaciones}")
+
     generar_embeddings_y_similitud(get_all_pdf_data(), papers_objetos=papers)
+
 
     # Mostrar información de los papers parecidos
     print("\n=== Papers parecidos encontrados ===")
