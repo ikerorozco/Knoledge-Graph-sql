@@ -4,6 +4,7 @@ import argparse
 import requests
 import xml.etree.ElementTree as ET
 from transformers import pipeline
+from models.organization import Organization
 
 # Configurar salida UTF-8
 sys.stdout.reconfigure(encoding='utf-8')
@@ -21,18 +22,17 @@ if not os.path.exists(PDF_DIRECTORY):
 # Endpoint de GROBID
 GROBID_URL = "http://localhost:8070/api/processFulltextDocument"
 
-# Namespaces TEI
-namespaces = {"tei": "http://www.tei-c.org/ns/1.0"}
-
-#------------------------------------------------------
-# Cargar el modelo NER de Hugging Face (mejorado)
+# Configurar el modelo NER de Hugging Face (solo cargar una vez)
 ner_pipeline = pipeline(
     "ner",
     model="Jean-Baptiste/roberta-large-ner-english",
     aggregation_strategy="simple"
 )
 
+# Namespaces TEI
+namespaces = {"tei": "http://www.tei-c.org/ns/1.0"}
 
+#------------------------------------------------------
 # Funciones para extraer datos desde XML GROBID
 def extract_acknowledgment(root):
     ack_texts = []
@@ -54,6 +54,45 @@ def extract_organizations_from_acknowledgment(acknowledgment_text):
 
 
     return organizations
+
+def agregar_organizaciones_de_acknowledgment_a_paper(paper, pdf_path, grobid_url="http://localhost:8070/api/processFulltextDocument"):
+    """
+    Procesa el acknowledgment del PDF y agrega organizaciones detectadas al objeto Paper.
+    Args:
+        paper (Paper): Objeto Paper a complementar.
+        pdf_path (str): Ruta al archivo PDF.
+        grobid_url (str): Endpoint de GROBID.
+    """
+    with open(pdf_path, "rb") as f:
+        response = requests.post(grobid_url, files={"input": f}, data={"consolidate": "1"})
+
+    if response.status_code != 200:
+        print(f"    Error {response.status_code} al procesar {pdf_path}")
+        return
+
+    try:
+        root = ET.fromstring(response.text)
+        acknowledgment = extract_acknowledgment(root)
+
+        if acknowledgment:
+            print(f"Acknowledgment extraído de {os.path.basename(pdf_path)}:")
+            print(acknowledgment)
+
+            organizations = extract_organizations_from_acknowledgment(acknowledgment)
+            if organizations:
+                print("Organizaciones detectadas:")
+                for org_name in organizations:
+                    print(f"  - {org_name}")
+                    # Evitar duplicados
+                    if not any(org.nombre == org_name for org in paper.organization):
+                        paper.organization.append(Organization(nombre=org_name))
+            else:
+                print("No se detectaron organizaciones en el acknowledgment.")
+        else:
+            print(f"No se encontró acknowledgment en {os.path.basename(pdf_path)}.")
+
+    except ET.ParseError as e:
+        print(f"    Error al analizar XML: {e}")
 
 # Procesar los archivos PDF
 pdf_files = [f for f in os.listdir(PDF_DIRECTORY) if f.lower().endswith(".pdf")]

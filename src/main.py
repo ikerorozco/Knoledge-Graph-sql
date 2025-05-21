@@ -103,6 +103,7 @@ if __name__ == "__main__":
             print("  Parecidos:")
             for parecido in paper.parecido:
                 print(f"    - {parecido.title}")
+                
     for paper in papers:
         buscar_por_titulo_openalex(paper)
         
