@@ -175,7 +175,7 @@ def get_all_pdf_data():
     return all_pdf_data
 
 
-def generar_embeddings_y_similitud(pdfs_extraidos, papers_objetos=None, umbral=0.7):
+def generar_embeddings_y_similitud(pdfs_extraidos, papers_objetos=None, umbral=0.05):
     abstracts = [pdf["abstract"] for pdf in pdfs_extraidos]
     nombres_pdf = [pdf["filename"] for pdf in pdfs_extraidos]
 
@@ -183,20 +183,15 @@ def generar_embeddings_y_similitud(pdfs_extraidos, papers_objetos=None, umbral=0
     embeddings = modelo.encode(abstracts)
     matriz_similitud = cosine_similarity(embeddings)
 
-    print("\n Matriz de similitud entre abstracts:")
-    print("      " + "  ".join(f"{name[:6]}" for name in nombres_pdf))
-    for i, row in enumerate(matriz_similitud):
-        print(f"{nombres_pdf[i][:6]}: " + "  ".join(f"{sim:.2f}" for sim in row))
+    # ... (puedes dejar el print de la matriz si lo deseas)
 
-    print("\n Pares de PDFs más similares:")
     for i in range(len(matriz_similitud)):
         for j in range(i + 1, len(matriz_similitud)):
             if matriz_similitud[i][j] > umbral:
-                print(f" - {nombres_pdf[i]} y {nombres_pdf[j]} → similitud: {matriz_similitud[i][j]:.2f}")
-                # Si tienes la lista de objetos Paper, agrega los parecidos
+                # Agregar el paper similar a la lista papersSimilares de ambos papers
                 if papers_objetos:
-                    papers_objetos[i].agregar_parecido(papers_objetos[j])
-                    papers_objetos[j].agregar_parecido(papers_objetos[i])
+                    papers_objetos[i].papersSimilares.append(papers_objetos[j])
+                    papers_objetos[j].papersSimilares.append(papers_objetos[i])
 
 
 def main():

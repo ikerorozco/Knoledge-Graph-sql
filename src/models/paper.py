@@ -9,7 +9,8 @@ class Paper:
     def __init__(self, title: str, doi: Optional[str] = None, date: Optional[str] = None,
                  idioma: Optional[str] = None, veces_citado: Optional[int] = None,
                  paginas: Optional[int] = None, rdf_type: Optional[str] = None,
-                 autores: Optional[List[Author]] = None, organization: Optional[List[Organization]] = None):
+                 autores: Optional[List[Author]] = None, organization: Optional[List[Organization]] = None,
+                 papersSimilares: Optional[List["Paper"]] = None) -> None:
         """
         Inicializa un paper con sus atributos.
         
@@ -35,6 +36,7 @@ class Paper:
         self.organization = organization if organization is not None else []
         self.flags = {}
         self.parecido: List["Paper"] = []  # <-- Nuevo atributo para papers parecidos
+        self.papersSimilares: List["Paper"] = papersSimilares if papersSimilares is not None else []
 
         self.set_flag('Title', title is not None)
         self.set_flag('Doi', doi is not None)
