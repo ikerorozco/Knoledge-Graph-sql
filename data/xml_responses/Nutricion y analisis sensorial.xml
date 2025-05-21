@@ -7,10 +7,10 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 		<fileDesc>
 			<titleStmt>
 				<title level="a" type="main">Nutritional and sensorial analysis of a lentil flour-based sweet pancake premix [version 2; peer review: 4 approved with reservations]</title>
-				<funder ref="#_rJuPsDa">
+				<funder ref="#_WMP8hqV">
 					<orgName type="full">unknown</orgName>
 				</funder>
-				<funder ref="#_TjbDXPj #_V3vwVpC">
+				<funder ref="#_R7aRN4R #_zghYyZR">
 					<orgName type="full">European Union</orgName>
 				</funder>
 			</titleStmt>
@@ -120,7 +120,7 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 		</fileDesc>
 		<encodingDesc>
 			<appInfo>
-				<application version="0.8.1" ident="GROBID" when="2025-05-21T14:47+0000">
+				<application version="0.8.2" ident="GROBID" when="2025-05-21T15:29+0000">
 					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
 					<label type="revision">a91ee48</label>
 					<label type="parameters">startPage=-1, endPage=-1, consolidateCitations=0, consolidateHeader=0, consolidateFunders=0, includeRawAffiliations=false, includeRawCitations=false, includeRawCopyrights=false, generateTeiIds=false, generateTeiCoordinates=[], sentenceSegmentation=false, flavor=null</label>
@@ -214,16 +214,16 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 <div><p>This research was financially supported by the <rs type="funder">European Union</rs>'s <rs type="programName">Horizon 2020 research and innovation program</rs> under grant agreement No. <rs type="grantNumber">727973</rs> (<rs type="projectName">Transition paths to sustainable legume based systems in Europe [TRUE</rs>]).</p></div>
 			</div>
 			<listOrg type="funding">
-				<org type="funded-project" xml:id="_TjbDXPj">
+				<org type="funded-project" xml:id="_R7aRN4R">
 					<idno type="grant-number">UIDB/50016/2020</idno>
 					<orgName type="project" subtype="full">FCT</orgName>
 					<orgName type="program" subtype="full">Horizon 2020 research and innovation program</orgName>
 				</org>
-				<org type="funded-project" xml:id="_rJuPsDa">
+				<org type="funded-project" xml:id="_WMP8hqV">
 					<idno type="grant-number">101000622</idno>
 					<orgName type="project" subtype="full">RADIANT</orgName>
 				</org>
-				<org type="funded-project" xml:id="_V3vwVpC">
+				<org type="funded-project" xml:id="_zghYyZR">
 					<idno type="grant-number">727973</idno>
 					<orgName type="project" subtype="full">Transition paths to sustainable legume based systems in Europe [TRUE</orgName>
 					<orgName type="program" subtype="full">Horizon 2020 research and innovation program</orgName>

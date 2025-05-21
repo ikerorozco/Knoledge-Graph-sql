@@ -86,11 +86,6 @@ if __name__ == "__main__":
         paper = crear_paper(pdf_data['title'], pdf_data['authors'], pdf_data['organizations'])
         papers.append(paper)
         
-    for paper in papers:
-        openalex_id = obtener_openalex_id_por_titulo(paper.title)
-        print(f"ID de OpenAlex para {paper.title}: {openalex_id}")
-        organizaciones = obtener_instituciones_por_openalex_id(openalex_id)
-        print(f"Organizaciones encontradas para {paper.title}: {organizaciones}")
 
     generar_embeddings_y_similitud(get_all_pdf_data(), papers_objetos=papers)
 
