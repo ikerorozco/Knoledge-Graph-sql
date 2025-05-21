@@ -5,9 +5,17 @@ import requests
 import xml.etree.ElementTree as ET
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
+from transformers import pipeline
 import numpy as np
 
 sys.stdout.reconfigure(encoding='utf-8')
+
+ner_pipeline = pipeline(
+    "ner",
+    model="Jean-Baptiste/roberta-large-ner-english",
+    aggregation_strategy="simple"
+)
+
 
 # Namespaces TEI
 namespaces = {"tei": "http://www.tei-c.org/ns/1.0"}
@@ -37,9 +45,10 @@ def Grobid_extract_organizations(root):
         org_el = aff.find(".//tei:orgName", namespaces)
         if org_el is not None and org_el.text:
             orgs.add(org_el.text.strip())
+
+    # Extraer organizaciones del acknowledgment
+    orgs.update(extract_organizations_from_acknowledgment(Grobid_extract_acknowledgment(root)))
     return list(orgs)
-
-
 
 def Grobid_extract_acknowledgment(root):
     ack_texts = []
@@ -48,6 +57,19 @@ def Grobid_extract_acknowledgment(root):
         if text:
             ack_texts.append(text.strip())
     return " ".join(ack_texts).strip()
+
+def extract_organizations_from_acknowledgment(acknowledgment_text):
+    # Usar el modelo NER de Hugging Face para detectar las organizaciones
+    entities = ner_pipeline(acknowledgment_text)
+    
+    organizations = {ent["word"]                    
+                     for ent in entities
+                     if ent["entity_group"] == "ORG"   # sólo entidades de tipo ORG
+       and ent["score"] >= 0.85       # umbral de confianza
+    }
+
+
+    return organizations
 
 def Grobid_extract_abstract(root):
     abstract_el = root.find(".//tei:abstract", namespaces)
