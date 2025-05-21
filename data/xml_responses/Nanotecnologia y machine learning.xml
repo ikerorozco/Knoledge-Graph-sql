@@ -7,15 +7,15 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 		<fileDesc>
 			<titleStmt>
 				<title level="a" type="main">Nanotechnology and LSTM machine learning algorithms in advanced fuel spray dynamics in CI engines with different bowl geometries</title>
-				<funder ref="#_a6SXjR6">
+				<funder ref="#_v5h9JeZ">
+					<orgName type="full">Recep Tayyip Erdogan University Development Foundation</orgName>
+				</funder>
+				<funder ref="#_rYtEavW">
 					<orgName type="full">Tenaga Nasional Berhad</orgName>
 					<orgName type="abbreviated">TNB</orgName>
 				</funder>
-				<funder ref="#_f7tr4xT">
+				<funder ref="#_kNRHTb7">
 					<orgName type="full">UNITEN</orgName>
-				</funder>
-				<funder ref="#_5dBGure">
-					<orgName type="full">Recep Tayyip Erdogan University Development Foundation</orgName>
 				</funder>
 			</titleStmt>
 			<publicationStmt>
@@ -237,7 +237,7 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 		</fileDesc>
 		<encodingDesc>
 			<appInfo>
-				<application version="0.8.1" ident="GROBID" when="2025-05-21T14:47+0000">
+				<application version="0.8.1" ident="GROBID" when="2025-05-21T15:19+0000">
 					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
 					<ref target="https://github.com/kermitt2/grobid"/>
 				</application>
@@ -348,14 +348,14 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.co
 <div><head>Acknowledgements</head><p>This study has been supported by the <rs type="funder">Recep Tayyip Erdogan University Development Foundation</rs> through the grant number <rs type="grantNumber">02025001002235</rs>.</p><p>The authors extend their appreciation to the <rs type="institution">Deanship of Scientific Research at King Khalid University, Saudi Arabia</rs> for funding this work through the <rs type="programName">Research Group Program</rs> under Grant No: <rs type="grantNumber">RGP 2/127/45</rs>. This work was supported by <rs type="funder">Tenaga Nasional Berhad (TNB)</rs> and <rs type="funder">UNITEN</rs> through the <rs type="grantName">BOLD Refresh Postdoctoral Fellowships under Grant</rs> <rs type="grantNumber">J510050002-IC-6</rs> <rs type="projectName">BOLDREFRESH2025-Centre of Excellence</rs>.</p></div>
 			</div>
 			<listOrg type="funding">
-				<org type="funding" xml:id="_5dBGure">
+				<org type="funding" xml:id="_v5h9JeZ">
 					<idno type="grant-number">02025001002235</idno>
 				</org>
-				<org type="funding" xml:id="_a6SXjR6">
+				<org type="funding" xml:id="_rYtEavW">
 					<idno type="grant-number">RGP 2/127/45</idno>
 					<orgName type="program" subtype="full">Research Group Program</orgName>
 				</org>
-				<org type="funded-project" xml:id="_f7tr4xT">
+				<org type="funded-project" xml:id="_kNRHTb7">
 					<idno type="grant-number">J510050002-IC-6</idno>
 					<orgName type="grant-name">BOLD Refresh Postdoctoral Fellowships under Grant</orgName>
 					<orgName type="project" subtype="full">BOLDREFRESH2025-Centre of Excellence</orgName>
