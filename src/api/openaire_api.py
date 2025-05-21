@@ -178,7 +178,7 @@ def buscar_autor_en_openaire(nombre_autor):
     except Exception:
         return None
 
-def completar_paper_con_api(paper):
+def completar_paper_con_openaire(paper):
     """
     Completa los campos vacíos de un objeto Paper usando la API de OpenAIRE.
     Además, valida y completa los autores y organizaciones.
@@ -225,30 +225,6 @@ def completar_paper_con_api(paper):
                 autor.trabajos = autor_completo.trabajos
             autores_validados.append(autor)
     paper.autores = autores_validados
-
-    # Validar y completar organizaciones
-    organizaciones_validadas = []
-    for org in getattr(paper, "organization", []):
-        # Si org es un string, conviértelo a Organization
-        if isinstance(org, str):
-            org_obj = Organization(nombre=org, lugar=None, rdftype=None, trabajos=None, links=None)
-        else:
-            org_obj = org
-
-        resultado = buscar_organizacion(org_obj.nombre)
-        if resultado and len(resultado) > 0:
-            org_api = resultado[0]
-            if not org_obj.lugar:
-                org_obj.lugar = org_api.lugar
-            if not org_obj.rdftype:
-                org_obj.rdftype = org_api.rdftype
-            if not org_obj.trabajos:
-                org_obj.trabajos = org_api.trabajos
-            if not org_obj.links:
-                org_obj.links = org_api.links
-        # Siempre agrega la organización, aunque no se haya actualizado
-        organizaciones_validadas.append(org_obj)
-    paper.organization = organizaciones_validadas
 
     return paper
 
