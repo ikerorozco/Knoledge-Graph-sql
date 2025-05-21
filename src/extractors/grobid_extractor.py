@@ -127,11 +127,11 @@ def process_pdfs(pdf_directory="data/raw", grobid_url="http://localhost:8070/api
             all_pdf_data.append(pdf_data)
             
             # Opcional: Mostrar un resumen de los datos extraídos
-            print(f"     Título: {pdf_data['title']}")
-            print(f"     # Autores: {len(pdf_data['authors'])}")
-            print(f"     Organizaciones: {', '.join(pdf_data['organizations'])}")
-            print(f"     Agradecimientos: {pdf_data['acknowledgment']}")
-            print(f"     Resumen: {pdf_data['abstract']}")
+            # print(f"     Título: {pdf_data['title']}")
+            # print(f"     # Autores: {len(pdf_data['authors'])}")
+            # print(f"     Organizaciones: {', '.join(pdf_data['organizations'])}")
+            # print(f"     Agradecimientos: {pdf_data['acknowledgment']}")
+            # print(f"     Resumen: {pdf_data['abstract']}")
 
         except ET.ParseError as e:
             print(f"     Error al analizar XML: {e}")
