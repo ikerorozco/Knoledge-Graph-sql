@@ -1,5 +1,5 @@
 from api.openaire_api import buscar_por_titulo as buscar_openaire
-from api.openaire_api import buscar_organizacion,completar_paper_con_openaire
+from api.openaire_api import buscar_organizacion, completar_paper_con_openaire, buscar_proyectos_asociados_paper
 from api.openalex_api import buscar_por_titulo_openalex
 from extractors.grobid_extractor import (
     main as grobid_extractor_main,
@@ -32,8 +32,8 @@ def crear_paper(pdf_data_title,pdf_data_authors,pdf_data_organizations):
         organization=crear_organizaciones(pdf_data_organizations),
     )
     paper = completar_paper_con_openaire(paper)
-    print(f"Paper creado y enriquecido con openaire: {paper.title}")
-    paper.mostrar_info()
+    #print(f"Paper creado y enriquecido con openaire: {paper.title}")
+    #paper.mostrar_info()
     return paper
 
 def crear_autores(pdf_data_authors):
@@ -59,19 +59,48 @@ def crear_organizaciones(pdf_data_organizations):
 def enriquecer_papers_openalex(papers):
     for paper in papers:
         buscar_por_titulo_openalex(paper)
-        print(f"Paper enriquecido con openalex: {paper.title}")
-        paper.mostrar_info()
+        #print(f"Paper enriquecido con openalex: {paper.title}")
+        #paper.mostrar_info()
+
+def obtener_proyectos_asociados(papers):
+    """
+    Busca todos los proyectos asociados a una lista de papers.
+    
+    Args:
+        papers (list): Lista de objetos Paper
+        
+    Returns:
+        list: Lista de objetos Project asociados a los papers
+    """
+    todos_proyectos = []
+    
+    print("\n=== Buscando proyectos asociados a los papers ===")
+    for i, paper in enumerate(papers, 1):
+        print(f"\nProcesando paper {i}/{len(papers)}: {paper.title}")
+        
+        # Buscar proyectos asociados a este paper
+        proyectos = buscar_proyectos_asociados_paper(paper)
+        # Añadir los proyectos encontrados a la lista general
+        todos_proyectos.extend(proyectos)
+    
+    # Mostrar resumen final
+    print(f"\n=== Resumen de proyectos encontrados ===")
+    print(f"Total de papers procesados: {len(papers)}")
+    print(f"Total de proyectos encontrados: {len(todos_proyectos)}")
+    
+    return todos_proyectos
+
 
 if __name__ == "__main__":
-
 
     all_pdf_data = grobid_extractor_main()
     papers = crear_papers_inicial(all_pdf_data) # contiene papers (enriquecidos con openaire) con autores (enriquecidos con openaire) y organizaciones
     enriquecer_papers_openalex(papers) # enriquecimiento de papers con openalex
-
+    # Obtener proyectos asociados a los papers
+    proyectos = obtener_proyectos_asociados(papers)
     
-    # generar_embeddings_y_similitud(get_all_pdf_data(), papers_objetos=papers)
 
+    # generar_embeddings_y_similitud(get_all_pdf_data(), papers_objetos=papers)
 
     # # Mostrar información de los papers parecidos
     # print("\n=== Papers parecidos encontrados ===")

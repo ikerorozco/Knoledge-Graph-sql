@@ -3,6 +3,8 @@ import xml.etree.ElementTree as ET
 from models.author import Author
 from models.paper import Paper
 from models.organization import Organization
+from models.project import Project
+from datetime import datetime
 
 def parsear_xml_openaire(xml_data):
     try:
@@ -260,3 +262,174 @@ def buscar_organizacion(nombre, pagina=1, resultados_por_pagina=1):
     except Exception as e:
         print(f"Error al consultar OpenAIRE para la organización '{nombre}': {e}")
         return None
+
+def buscar_proyectos_por_titulo(paper):
+    """
+    Busca un paper por título en OpenAIRE y extrae los IDs de los proyectos asociados.
+    
+    Args:
+        paper (Paper): Objeto Paper con el título a buscar
+        
+    Returns:
+        list: Lista de IDs de proyectos únicos encontrados
+    """
+    try:
+        titulo = paper.title
+        print(f"\nBuscando proyectos en OpenAIRE para el paper: {titulo}\n")
+        
+        api_url = f"https://api.openaire.eu/search/publications?title={titulo}&format=xml"
+        response = requests.get(api_url, timeout=10)
+        
+        if response.status_code != 200:
+            print(f"Error al consultar OpenAIRE (Error {response.status_code})")
+            return []
+            
+        # Parsear el XML de respuesta
+        root = ET.fromstring(response.text)
+        
+        # Buscar todos los IDs de proyectos en la respuesta
+        proyecto_ids = []
+        
+        # Buscar relaciones del tipo "isProducedBy" con proyectos
+        for rel in root.findall('.//rel'):
+            to_elem = rel.find('./to[@class="isProducedBy"][@type="project"]')
+            if to_elem is not None:
+                proyecto_id = to_elem.text.strip()
+                if proyecto_id and proyecto_id not in proyecto_ids:
+                    proyecto_ids.append(proyecto_id)
+        
+        if proyecto_ids:
+            print(f"Se encontraron {len(proyecto_ids)} proyectos asociados al paper.")
+        else:
+            print("No se encontraron proyectos asociados al paper.")
+            
+        return proyecto_ids
+        
+    except ET.ParseError as e:
+        print(f"Error al parsear XML: {e}")
+        return []
+    except Exception as e:
+        print(f"Error al buscar proyectos: {e}")
+        return []
+
+def buscar_proyecto_por_id(proyecto_id, paper=None):
+    """
+    Busca un proyecto por su ID en OpenAIRE y crea un objeto Project con la información.
+    
+    Args:
+        proyecto_id (str): ID del proyecto a buscar
+        paper (Paper, optional): Objeto Paper a asociar con el proyecto. Defaults to None.
+        
+    Returns:
+        Project: Objeto Project con la información del proyecto, o None si hay error
+    """
+    try:
+        print(f"\nBuscando proyecto en OpenAIRE con ID: {proyecto_id}\n")
+        
+        api_url = f"https://api.openaire.eu/graph/v1/projects"
+        params = {
+            "id": proyecto_id,
+            "page": 1,
+            "pageSize": 1,
+            "sortBy": "relevance DESC"
+        }
+        
+        response = requests.get(api_url, params=params, timeout=10)
+        
+        if response.status_code != 200:
+            print(f"Error al consultar OpenAIRE (Error {response.status_code})")
+            return None
+            
+        # Parsear el JSON de respuesta
+        data = response.json()
+        
+        # Verificar si hay resultados
+        resultados = data.get("results", [])
+        if not resultados:
+            print("No se encontró el proyecto con el ID proporcionado.")
+            return None
+            
+        # Obtener el primer resultado (debería ser único por ID)
+        proyecto_data = resultados[0]
+        
+        # Extraer información básica del proyecto
+        nombre = proyecto_data.get("title")
+        funded_amount = None
+        start_date = None
+        end_date = None
+        
+        # Obtener monto financiado
+        granted = proyecto_data.get("granted", {})
+        if granted and "fundedAmount" in granted:
+            funded_amount = float(granted["fundedAmount"])
+        
+        # Convertir fechas de string a objeto date
+        if proyecto_data.get("startDate"):
+            try:
+                start_date = datetime.strptime(proyecto_data.get("startDate"), "%Y-%m-%d").date()
+            except ValueError:
+                print(f"Error al convertir la fecha de inicio: {proyecto_data.get('startDate')}")
+        
+        if proyecto_data.get("endDate"):
+            try:
+                end_date = datetime.strptime(proyecto_data.get("endDate"), "%Y-%m-%d").date()
+            except ValueError:
+                print(f"Error al convertir la fecha de fin: {proyecto_data.get('endDate')}")
+        
+        # Crear objeto Project
+        project = Project(
+            nombre=nombre,
+            fundedAmount=funded_amount,
+            startdate=start_date,
+            enddate=end_date,
+            papers=[paper] if paper else None
+        )
+        
+        # Mostrar información del proyecto encontrado
+        print(f"Proyecto encontrado: {project.nombre} y asociado al paper: {paper.title}")
+        
+        return project
+        
+    except Exception as e:
+        print(f"Error al buscar proyecto: {e}")
+        return None
+
+def buscar_proyectos_asociados_paper(paper):
+    """
+    Busca todos los proyectos asociados a un paper.
+    
+    El proceso consta de dos pasos:
+    1. Busca los IDs de proyectos asociados al paper por su título
+    2. Para cada ID, obtiene los detalles completos del proyecto
+    
+    Args:
+        paper (Paper): Objeto Paper con el título a buscar
+        
+    Returns:
+        list: Lista de objetos Project asociados al paper
+    """
+    try:
+        # Paso 1: Obtener IDs de proyectos asociados al paper
+        proyecto_ids = buscar_proyectos_por_titulo(paper)
+        
+        if not proyecto_ids:
+            #print(f"No se encontraron proyectos asociados al paper: {paper.title}")
+            return []
+        
+        # Paso 2: Obtener información detallada de cada proyecto
+        proyectos = []
+        for proyecto_id in proyecto_ids:
+            proyecto = buscar_proyecto_por_id(proyecto_id, paper)
+            if proyecto:
+                print(f"Proyecto encontrado: {proyecto.nombre}")
+                proyecto.mostrar_info()
+                proyectos.append(proyecto)
+        
+        # Resumen de resultados
+        print(f"\nSe encontraron {len(proyectos)} de {len(proyecto_ids)} proyectos asociados al paper: {paper.title}")
+        
+        return proyectos
+        
+    except Exception as e:
+        print(f"Error al buscar proyectos asociados al paper: {e}")
+        return []
