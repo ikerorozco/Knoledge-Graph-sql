@@ -10,6 +10,7 @@ from extractors.grobid_extractor import (
 from models.paper import Paper
 from models.author import Author
 from models.organization import Organization
+from graph.graph_creator import create_knowledge_graph    
 
 # Creacion de objetos
 def crear_papers_inicial(all_pdf_data):
@@ -99,8 +100,16 @@ if __name__ == "__main__":
     # Obtener proyectos asociados a los papers
     proyectos = obtener_proyectos_asociados(papers)
     
-
-    # generar_embeddings_y_similitud(get_all_pdf_data(), papers_objetos=papers)
+    # Generar embeddings y similitud entre papers
+    generar_embeddings_y_similitud(get_all_pdf_data(), papers_objetos=papers)
+    
+    # Crear el grafo de conocimiento
+    kg = create_knowledge_graph(papers, proyectos)
+    
+    # Visualizar el grafo y guardar la imagen
+    print("\n=== Creando visualización del grafo de conocimiento ===")
+    graph_image_path = kg.visualize(save_path="knowledge_graph.png")
+    print(f"Grafo guardado como imagen en: {graph_image_path}")
 
     # # Mostrar información de los papers parecidos
     # print("\n=== Papers parecidos encontrados ===")
