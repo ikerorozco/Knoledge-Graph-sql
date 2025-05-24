@@ -110,42 +110,9 @@ if __name__ == "__main__":
     print("\n=== Creando visualización del grafo de conocimiento ===")
     graph_image_path = kg.visualize(save_path="knowledge_graph.png")
     print(f"Grafo guardado como imagen en: {graph_image_path}")
-
-    # # Mostrar información de los papers parecidos
-    # print("\n=== Papers parecidos encontrados ===")
-    # for paper in papers:
-    #     if paper.parecido:
-    #         print(f"\nPaper: {paper.title}")
-    #         print("  Parecidos:")
-    #         for parecido in paper.parecido:
-    #             print(f"    - {parecido.title}")
-                
-    # for paper in papers:
-    #     buscar_por_titulo_openalex(paper)
-        
-    # # Mostrar información completa de los autores de cada paper
-    # print("\n=== Información completa de los autores de cada paper ===")
-    # for paper in papers:
-    #     print(f"\nPaper: {paper.title}")
-    #     if paper.autores:
-    #         for autor in paper.autores:
-    #             print(f"  Autor: {getattr(autor, 'nombre', 'Desconocido')}")
-    #             print(f"    Tipo: {getattr(autor, 'rdf_type', 'Desconocido')}")
-    #             print(f"    Profesión: {getattr(autor, 'profesion', 'Desconocido')}")
-    #             print(f"    Trabajos: {getattr(autor, 'trabajos', 'Desconocido')}")
-    #     else:
-    #         print("  No hay autores registrados.")
-            
-    # # Mostrar información completa de las organizaciones de cada paper
-    # print("\n=== Información completa de las organizaciones de cada paper ===")
-    # for paper in papers:
-    #     print(f"\nPaper: {paper.title}")
-    #     if paper.organization:
-    #         for org in paper.organization:
-    #             print(f"  Organización: {getattr(org, 'nombre', 'Desconocido')}")
-    #             print(f"    Tipo: {getattr(org, 'rdftype', 'Desconocido')}")
-    #             print(f"    País: {getattr(org, 'lugar', 'Desconocido')}")
-    #             print(f"    Trabajos: {getattr(org, 'trabajos', 'Desconocido')}")
-    #             print(f"    Enlace: {getattr(org, 'links', 'Desconocido')}")
-    #     else:
-    #         print("  No hay organizaciones registradas.")
+    
+    # Exportar el grafo a RDF
+    print("\n=== Exportando el grafo de conocimiento a RDF ===")
+    rdf_file_path = "data/graphs/knowledge_graph.ttl"  # Formato Turtle RDF
+    kg.export_to_rdf(rdf_file_path)
+    print(f"Grafo exportado a RDF en: {rdf_file_path}")

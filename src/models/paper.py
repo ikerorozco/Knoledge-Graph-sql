@@ -35,7 +35,7 @@ class Paper:
         self.autores = autores if autores is not None else []
         self.organization = organization if organization is not None else []
         self.flags = {}
-        self.parecido: List["Paper"] = []  # <-- Nuevo atributo para papers parecidos
+        #self.parecido: List["Paper"] = []  # <-- Nuevo atributo para papers parecidos
         self.papersSimilares: List["Paper"] = papersSimilares if papersSimilares is not None else []
 
         self.set_flag('Title', title is not None)

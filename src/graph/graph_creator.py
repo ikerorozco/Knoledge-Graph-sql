@@ -6,6 +6,8 @@ from models.project import Project
 import matplotlib.pyplot as plt
 from typing import List, Dict, Any, Optional
 import matplotlib.patches as mpatches
+from rdflib import Graph, Literal, URIRef, Namespace
+from rdflib.namespace import RDF, RDFS, XSD, FOAF, DC
 
 class KnowledgeGraph:
     def __init__(self):
@@ -40,11 +42,6 @@ class KnowledgeGraph:
                     # Direction: organization affiliated_with paper
                     self.graph.add_edge(org_id, paper.title, relationship="affiliated_with")
             
-            # Add similar papers relationships (paper -> similar_paper: similar_to)
-            if hasattr(paper, 'parecido') and paper.parecido:
-                for similar_paper in paper.parecido:
-                    self.graph.add_node(similar_paper.title, type="paper", data=similar_paper)
-                    self.graph.add_edge(paper.title, similar_paper.title, relationship="similar_to")
             
             # Also check the papersSimilares attribute that exists in the model
             if hasattr(paper, 'papersSimilares') and paper.papersSimilares:
@@ -138,7 +135,6 @@ class KnowledgeGraph:
             'has_organization': 'red',
             'similar_to': 'blue',
             'funded': 'orange',
-            'funded_by': 'orange',
             'related_to': 'purple',
             'default': 'gray'
         }
@@ -222,7 +218,7 @@ class KnowledgeGraph:
             mpatches.Patch(color=edge_color_map['authored'], label='Authored/Has Author'),
             mpatches.Patch(color=edge_color_map['affiliated_with'], label='Affiliated With/Has Organization'),
             mpatches.Patch(color=edge_color_map['similar_to'], label='Similar To'),
-            mpatches.Patch(color=edge_color_map['funded'], label='Funded/Funded By'),
+            mpatches.Patch(color=edge_color_map['funded'], label='Funded'),
             mpatches.Patch(color=edge_color_map['related_to'], label='Related To')
         ]
         
@@ -250,9 +246,163 @@ class KnowledgeGraph:
         Args:
             output_file: Path to the output RDF file
         """
-        # This is a placeholder for RDF export functionality
-        # You would need to implement RDF serialization using a library like rdflib
-        pass
+        # Create an RDF graph
+        rdf_graph = Graph()
+        
+        # Define namespaces
+        KG = Namespace("http://knowledge-graph.org/")
+        PAPER = Namespace("http://knowledge-graph.org/paper/")
+        AUTHOR = Namespace("http://knowledge-graph.org/author/")
+        ORG = Namespace("http://knowledge-graph.org/organization/")
+        PROJECT = Namespace("http://knowledge-graph.org/project/")
+        
+        # Bind namespaces to prefixes for better readability
+        rdf_graph.bind("kg", KG)
+        rdf_graph.bind("paper", PAPER)
+        rdf_graph.bind("author", AUTHOR)
+        rdf_graph.bind("org", ORG)
+        rdf_graph.bind("project", PROJECT)
+        rdf_graph.bind("foaf", FOAF)
+        rdf_graph.bind("dc", DC)
+        
+        # Helper function to create a URI-safe ID
+        def uri_safe(name: str) -> str:
+            return name.replace(" ", "_").replace("/", "_").replace(":", "_").replace(",", "_").replace(".", "_")
+        
+        # Process all nodes in the graph
+        for node, data in self.graph.nodes(data=True):
+            node_type = data.get('type', '')
+            node_data = data.get('data')
+            
+            if node_type == 'paper' and node_data:
+                # Create paper URI
+                paper_uri = PAPER[uri_safe(node)]
+                
+                # Add paper triples
+                rdf_graph.add((paper_uri, RDF.type, KG.Paper))
+                rdf_graph.add((paper_uri, DC.title, Literal(node_data.title)))
+                
+                if node_data.doi:
+                    rdf_graph.add((paper_uri, DC.identifier, Literal(node_data.doi)))
+                
+                if node_data.date:
+                    rdf_graph.add((paper_uri, DC.date, Literal(node_data.date)))
+                
+                if node_data.idioma:
+                    rdf_graph.add((paper_uri, DC.language, Literal(node_data.idioma)))
+                
+                if node_data.veces_citado:
+                    rdf_graph.add((paper_uri, KG.timesCited, Literal(node_data.veces_citado, datatype=XSD.integer)))
+                
+                if node_data.paginas:
+                    rdf_graph.add((paper_uri, KG.pages, Literal(node_data.paginas, datatype=XSD.integer)))
+            
+            elif node_type == 'author' and node_data:
+                # Create author URI
+                author_uri = AUTHOR[uri_safe(node)]
+                
+                # Add author triples
+                rdf_graph.add((author_uri, RDF.type, KG.Author))
+                rdf_graph.add((author_uri, FOAF.name, Literal(node_data.nombre)))
+                
+                if node_data.profesion:
+                    rdf_graph.add((author_uri, KG.profession, Literal(node_data.profesion)))
+                
+                if node_data.trabajos:
+                    rdf_graph.add((author_uri, KG.works, Literal(node_data.trabajos, datatype=XSD.integer)))
+            
+            elif node_type == 'organization' and node_data:
+                # Create organization URI
+                org_uri = ORG[uri_safe(node)]
+                
+                # Add organization triples
+                rdf_graph.add((org_uri, RDF.type, KG.Organization))
+                rdf_graph.add((org_uri, FOAF.name, Literal(node_data.nombre)))
+                
+                if node_data.lugar:
+                    rdf_graph.add((org_uri, KG.location, Literal(node_data.lugar)))
+                
+                if node_data.trabajos:
+                    rdf_graph.add((org_uri, KG.works, Literal(node_data.trabajos, datatype=XSD.integer)))
+                
+                if hasattr(node_data, 'links') and node_data.links:
+                    for link in node_data.links:
+                        rdf_graph.add((org_uri, FOAF.page, URIRef(link)))
+            
+            elif node_type == 'project' and node_data:
+                # Create project URI
+                project_uri = PROJECT[uri_safe(node)]
+                
+                # Add project triples
+                rdf_graph.add((project_uri, RDF.type, KG.Project))
+                rdf_graph.add((project_uri, DC.title, Literal(node_data.nombre)))
+                
+                if node_data.fundedAmount:
+                    rdf_graph.add((project_uri, KG.fundedAmount, Literal(node_data.fundedAmount, datatype=XSD.decimal)))
+                
+                if node_data.startdate:
+                    rdf_graph.add((project_uri, KG.startDate, Literal(node_data.startdate.isoformat(), datatype=XSD.date)))
+                
+                if node_data.enddate:
+                    rdf_graph.add((project_uri, KG.endDate, Literal(node_data.enddate.isoformat(), datatype=XSD.date)))
+        
+        # Process all edges (relationships) in the graph
+        for source, target, edge_data in self.graph.edges(data=True):
+            relationship = edge_data.get('relationship', '')
+            
+            # Skip if no relationship is defined
+            if not relationship:
+                continue
+            
+            # Get source and target node types
+            source_type = self.graph.nodes[source].get('type', '')
+            target_type = self.graph.nodes[target].get('type', '')
+            
+            # Create URIs for source and target
+            source_uri = None
+            target_uri = None
+            
+            if source_type == 'paper':
+                source_uri = PAPER[uri_safe(source)]
+            elif source_type == 'author':
+                source_uri = AUTHOR[uri_safe(source)]
+            elif source_type == 'organization':
+                source_uri = ORG[uri_safe(source)]
+            elif source_type == 'project':
+                source_uri = PROJECT[uri_safe(source)]
+                
+            if target_type == 'paper':
+                target_uri = PAPER[uri_safe(target)]
+            elif target_type == 'author':
+                target_uri = AUTHOR[uri_safe(target)]
+            elif target_type == 'organization':
+                target_uri = ORG[uri_safe(target)]
+            elif target_type == 'project':
+                target_uri = PROJECT[uri_safe(target)]
+            
+            # Add relationship triple if both URIs are valid
+            if source_uri and target_uri:
+                # Map relationship types to RDF predicates
+                if relationship == 'authored':
+                    rdf_graph.add((source_uri, KG.authored, target_uri))
+                elif relationship == 'has_author':
+                    rdf_graph.add((source_uri, KG.hasAuthor, target_uri))
+                elif relationship == 'affiliated_with':
+                    rdf_graph.add((source_uri, KG.affiliatedWith, target_uri))
+                elif relationship == 'has_organization':
+                    rdf_graph.add((source_uri, KG.hasOrganization, target_uri))
+                elif relationship == 'similar_to':
+                    rdf_graph.add((source_uri, KG.similarTo, target_uri))
+                elif relationship == 'funded':
+                    rdf_graph.add((source_uri, KG.funded, target_uri))
+                elif relationship == 'related_to':
+                    rdf_graph.add((source_uri, KG.relatedTo, target_uri))
+        
+        # Serialize the RDF graph to file
+        print(f"Saving RDF graph to {output_file}")
+        rdf_graph.serialize(destination=output_file, format="turtle")
+        
+        return output_file
     
     def query_graph(self, query_type: str, query_params: Dict[str, Any]):
         """
@@ -303,15 +453,6 @@ class KnowledgeGraph:
                     org_data = self.graph.nodes[org].get("data")
                     if org_data:
                         results.append(org_data)
-        
-        elif query_type == "projects_of_paper":
-            paper_title = query_params.get("paper_title")
-            # Look for direct edges from paper to project
-            for _, project, edge_data in self.graph.out_edges(paper_title, data=True):
-                if edge_data.get("relationship") == "funded_by":
-                    project_data = self.graph.nodes[project].get("data")
-                    if project_data:
-                        results.append(project_data)
         
         elif query_type == "papers_by_project":
             project_name = query_params.get("project_name")

@@ -1,0 +1,435 @@
+@prefix author: <http://knowledge-graph.org/author/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix kg: <http://knowledge-graph.org/> .
+@prefix org1: <http://knowledge-graph.org/organization/> .
+@prefix paper: <http://knowledge-graph.org/paper/> .
+@prefix project: <http://knowledge-graph.org/project/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+org1:CBQF_-Centro_de_Biotecnologia_e_Química_Fina a kg:Organization ;
+    kg:affiliatedWith <http://knowledge-graph.org/paper/Nutritional_and_sensorial_analysis_of_a_lentil_flour-based_sweet_pancake_premix_[version_2;_peer_review__4_approved_with_reservations]> ;
+    foaf:name "CBQF -Centro de Biotecnologia e Química Fina" .
+
+<http://knowledge-graph.org/organization/Center_for_Research_Impact_&_Outcome> a kg:Organization ;
+    kg:affiliatedWith paper:Nanotechnology_and_LSTM_machine_learning_algorithms_in_advanced_fuel_spray_dynamics_in_CI_engines_with_different_bowl_geometries ;
+    foaf:name "Center for Research Impact & Outcome" .
+
+org1:College_of_Engineering a kg:Organization ;
+    kg:affiliatedWith paper:Nanotechnology_and_LSTM_machine_learning_algorithms_in_advanced_fuel_spray_dynamics_in_CI_engines_with_different_bowl_geometries ;
+    kg:works 7390 ;
+    foaf:name "College of Engineering" ;
+    foaf:page <.>,
+        </>,
+        <1>,
+        <3>,
+        <4>,
+        <5>,
+        <6>,
+        <7>,
+        <9>,
+        <:>,
+        <I>,
+        <a>,
+        <e>,
+        <g>,
+        <h>,
+        <l>,
+        <n>,
+        <o>,
+        <p>,
+        <r>,
+        <s>,
+        <t>,
+        <x> .
+
+org1:Department_of_Industrial_Engineering a kg:Organization ;
+    kg:affiliatedWith paper:Nanotechnology_and_LSTM_machine_learning_algorithms_in_advanced_fuel_spray_dynamics_in_CI_engines_with_different_bowl_geometries ;
+    foaf:name "Department of Industrial Engineering" .
+
+org1:Department_of_Information_Systems a kg:Organization ;
+    kg:affiliatedWith paper:Nanotechnology_and_LSTM_machine_learning_algorithms_in_advanced_fuel_spray_dynamics_in_CI_engines_with_different_bowl_geometries ;
+    foaf:name "Department of Information Systems" .
+
+org1:Department_of_Mechanical_Engineering a kg:Organization ;
+    kg:affiliatedWith paper:Nanotechnology_and_LSTM_machine_learning_algorithms_in_advanced_fuel_spray_dynamics_in_CI_engines_with_different_bowl_geometries ;
+    foaf:name "Department of Mechanical Engineering" .
+
+org1:Department_of_Photoelectric_Engineering a kg:Organization ;
+    kg:affiliatedWith paper:Nanotechnology_and_LSTM_machine_learning_algorithms_in_advanced_fuel_spray_dynamics_in_CI_engines_with_different_bowl_geometries ;
+    foaf:name "Department of Photoelectric Engineering" .
+
+org1:Division_of_Research_and_Development a kg:Organization ;
+    kg:affiliatedWith paper:Nanotechnology_and_LSTM_machine_learning_algorithms_in_advanced_fuel_spray_dynamics_in_CI_engines_with_different_bowl_geometries ;
+    foaf:name "Division of Research and Development" .
+
+org1:HAOMO a kg:Organization ;
+    kg:affiliatedWith paper:Quality_over_Quantity__Boosting_Data_Efficiency_Through_Ensembled_Multimodal_Data_Curation ;
+    foaf:name "HAOMO" .
+
+org1:IKRAM-UNITEN a kg:Organization ;
+    kg:affiliatedWith paper:Nanotechnology_and_LSTM_machine_learning_algorithms_in_advanced_fuel_spray_dynamics_in_CI_engines_with_different_bowl_geometries ;
+    foaf:name "IKRAM-UNITEN" .
+
+org1:Institute_of_Communication_and_Computer_Systems a kg:Organization ;
+    kg:affiliatedWith paper:Plant_Disease_Identification_Using_Machine_Learning_Algorithms_on_Single-Board_Computers_in_IoT_Environments ;
+    kg:location "GR" ;
+    kg:works 1389 ;
+    foaf:name "Institute of Communication and Computer Systems" ;
+    foaf:page <.>,
+        </>,
+        <0>,
+        <1>,
+        <2>,
+        <4>,
+        <5>,
+        <9>,
+        <:>,
+        <I>,
+        <a>,
+        <e>,
+        <g>,
+        <h>,
+        <l>,
+        <n>,
+        <o>,
+        <p>,
+        <r>,
+        <s>,
+        <t>,
+        <x> .
+
+org1:Institute_of_Sustainable_Energy a kg:Organization ;
+    kg:affiliatedWith paper:Nanotechnology_and_LSTM_machine_learning_algorithms_in_advanced_fuel_spray_dynamics_in_CI_engines_with_different_bowl_geometries ;
+    foaf:name "Institute of Sustainable Energy" .
+
+org1:Konya_Technical_University a kg:Organization ;
+    kg:affiliatedWith <http://knowledge-graph.org/paper/Nutritional_and_sensorial_analysis_of_a_lentil_flour-based_sweet_pancake_premix_[version_2;_peer_review__4_approved_with_reservations]> ;
+    foaf:name "Konya Technical University" .
+
+org1:Muğla_Sıtkı_Koçman_University a kg:Organization ;
+    kg:affiliatedWith <http://knowledge-graph.org/paper/Nutritional_and_sensorial_analysis_of_a_lentil_flour-based_sweet_pancake_premix_[version_2;_peer_review__4_approved_with_reservations]> ;
+    foaf:name "Muğla Sıtkı Koçman University" .
+
+org1:Saint_Francis_Xavier_University a kg:Organization ;
+    kg:affiliatedWith <http://knowledge-graph.org/paper/Nutritional_and_sensorial_analysis_of_a_lentil_flour-based_sweet_pancake_premix_[version_2;_peer_review__4_approved_with_reservations]> ;
+    foaf:name "Saint Francis Xavier University" .
+
+org1:School_of_Electrical_Engineering_and_Computer_Engineering a kg:Organization ;
+    kg:affiliatedWith paper:Plant_Disease_Identification_Using_Machine_Learning_Algorithms_on_Single-Board_Computers_in_IoT_Environments ;
+    foaf:name "School of Electrical Engineering and Computer Engineering" .
+
+org1:Shanghai_Key_Laboratory_of_Scalable_Computing_and_Systems a kg:Organization ;
+    kg:affiliatedWith paper:Quality_over_Quantity__Boosting_Data_Efficiency_Through_Ensembled_Multimodal_Data_Curation ;
+    foaf:name "Shanghai Key Laboratory of Scalable Computing and Systems" .
+
+org1:TNB a kg:Organization ;
+    kg:affiliatedWith paper:Nanotechnology_and_LSTM_machine_learning_algorithms_in_advanced_fuel_spray_dynamics_in_CI_engines_with_different_bowl_geometries ;
+    foaf:name "TNB" .
+
+org1:Toros_University a kg:Organization ;
+    kg:affiliatedWith <http://knowledge-graph.org/paper/Nutritional_and_sensorial_analysis_of_a_lentil_flour-based_sweet_pancake_premix_[version_2;_peer_review__4_approved_with_reservations]> ;
+    foaf:name "Toros University" .
+
+org1:University_Centre_for_Research_and_Development a kg:Organization ;
+    kg:affiliatedWith paper:Nanotechnology_and_LSTM_machine_learning_algorithms_in_advanced_fuel_spray_dynamics_in_CI_engines_with_different_bowl_geometries ;
+    foaf:name "University Centre for Research and Development" .
+
+org1:_Deanship_of_Scientific_Research a kg:Organization ;
+    kg:affiliatedWith paper:Nanotechnology_and_LSTM_machine_learning_algorithms_in_advanced_fuel_spray_dynamics_in_CI_engines_with_different_bowl_geometries ;
+    foaf:name " Deanship of Scientific Research" .
+
+org1:_European_Union a kg:Organization ;
+    kg:affiliatedWith <http://knowledge-graph.org/paper/Nutritional_and_sensorial_analysis_of_a_lentil_flour-based_sweet_pancake_premix_[version_2;_peer_review__4_approved_with_reservations]> ;
+    foaf:name " European Union" .
+
+org1:_FCT a kg:Organization ;
+    kg:affiliatedWith <http://knowledge-graph.org/paper/Nutritional_and_sensorial_analysis_of_a_lentil_flour-based_sweet_pancake_premix_[version_2;_peer_review__4_approved_with_reservations]> ;
+    foaf:name " FCT" .
+
+org1:_King_Khalid_University a kg:Organization ;
+    kg:affiliatedWith paper:Nanotechnology_and_LSTM_machine_learning_algorithms_in_advanced_fuel_spray_dynamics_in_CI_engines_with_different_bowl_geometries ;
+    kg:location "SA" ;
+    kg:works 32121 ;
+    foaf:name " King Khalid University" ;
+    foaf:page <.>,
+        </>,
+        <2>,
+        <3>,
+        <5>,
+        <6>,
+        <8>,
+        <9>,
+        <:>,
+        <I>,
+        <a>,
+        <e>,
+        <g>,
+        <h>,
+        <l>,
+        <n>,
+        <o>,
+        <p>,
+        <r>,
+        <s>,
+        <t>,
+        <x> .
+
+org1:_Laboratory_of_Pinghu a kg:Organization ;
+    kg:affiliatedWith paper:Quality_over_Quantity__Boosting_Data_Efficiency_Through_Ensembled_Multimodal_Data_Curation ;
+    foaf:name " Laboratory of Pinghu" .
+
+org1:_NSF a kg:Organization ;
+    kg:affiliatedWith paper:Quality_over_Quantity__Boosting_Data_Efficiency_Through_Ensembled_Multimodal_Data_Curation ;
+    kg:location "US" ;
+    kg:works 32567 ;
+    foaf:name " NSF" ;
+    foaf:page <.>,
+        </>,
+        <0>,
+        <1>,
+        <3>,
+        <6>,
+        <7>,
+        <8>,
+        <:>,
+        <I>,
+        <a>,
+        <e>,
+        <g>,
+        <h>,
+        <l>,
+        <n>,
+        <o>,
+        <p>,
+        <r>,
+        <s>,
+        <t>,
+        <x> .
+
+org1:_Recep_Tayyip_Erdogan_University_Development_Foundation a kg:Organization ;
+    kg:affiliatedWith paper:Nanotechnology_and_LSTM_machine_learning_algorithms_in_advanced_fuel_spray_dynamics_in_CI_engines_with_different_bowl_geometries ;
+    foaf:name " Recep Tayyip Erdogan University Development Foundation" .
+
+org1:_Tenaga_Nasional_Berhad a kg:Organization ;
+    kg:affiliatedWith paper:Nanotechnology_and_LSTM_machine_learning_algorithms_in_advanced_fuel_spray_dynamics_in_CI_engines_with_different_bowl_geometries ;
+    kg:location "MY" ;
+    kg:works 1647 ;
+    foaf:name " Tenaga Nasional Berhad" ;
+    foaf:page <.>,
+        </>,
+        <0>,
+        <4>,
+        <5>,
+        <6>,
+        <7>,
+        <8>,
+        <9>,
+        <:>,
+        <I>,
+        <a>,
+        <e>,
+        <g>,
+        <h>,
+        <l>,
+        <n>,
+        <o>,
+        <p>,
+        <r>,
+        <s>,
+        <t>,
+        <x> .
+
+org1:_UNITEN a kg:Organization ;
+    kg:affiliatedWith paper:Nanotechnology_and_LSTM_machine_learning_algorithms_in_advanced_fuel_spray_dynamics_in_CI_engines_with_different_bowl_geometries ;
+    foaf:name " UNITEN" .
+
+paper:THE_STEGANOGRAPHIC_POTENTIALS_OF_LANGUAGE_MODELS a kg:Paper ;
+    dc:title "THE STEGANOGRAPHIC POTENTIALS OF LANGUAGE MODELS" .
+
+project:Building_an_Interoperable__Data-Driven__Innovative_and_Sustainable_European_Agri-Food_Sector a kg:Project ;
+    kg:endDate "2023-08-31"^^xsd:date ;
+    kg:funded paper:Plant_Disease_Identification_Using_Machine_Learning_Algorithms_on_Single-Board_Computers_in_IoT_Environments ;
+    kg:fundedAmount 14998300.0 ;
+    kg:startDate "2019-09-01"^^xsd:date ;
+    dc:title "Building an Interoperable, Data-Driven, Innovative and Sustainable European Agri-Food Sector" .
+
+project:DemonstratIng_Value_of_agri_data_sharIng_for_boostiNg_data_Economy_in_agriculture a kg:Project ;
+    kg:endDate "2025-09-30"^^xsd:date ;
+    kg:funded paper:Plant_Disease_Identification_Using_Machine_Learning_Algorithms_on_Single-Board_Computers_in_IoT_Environments ;
+    kg:fundedAmount 3954800.0 ;
+    kg:startDate "2022-10-01"^^xsd:date ;
+    dc:title "DemonstratIng Value of agri data sharIng for boostiNg data Economy in agriculture" .
+
+author:Armin_Rajabi a kg:Author ;
+    kg:authored paper:Nanotechnology_and_LSTM_machine_learning_algorithms_in_advanced_fuel_spray_dynamics_in_CI_engines_with_different_bowl_geometries ;
+    kg:profession "No especificado" ;
+    kg:works 67 ;
+    foaf:name "Armin Rajabi" .
+
+author:Daming_Wang a kg:Author ;
+    kg:authored paper:Quality_over_Quantity__Boosting_Data_Efficiency_Through_Ensembled_Multimodal_Data_Curation ;
+    kg:profession "No especificado" ;
+    kg:works 313 ;
+    foaf:name "Daming Wang" .
+
+author:Erdem_Cüce a kg:Author ;
+    kg:authored paper:Nanotechnology_and_LSTM_machine_learning_algorithms_in_advanced_fuel_spray_dynamics_in_CI_engines_with_different_bowl_geometries ;
+    kg:profession "No especificado" ;
+    kg:works 222 ;
+    foaf:name "Erdem Cüce" .
+
+author:George_Routis a kg:Author ;
+    kg:authored paper:Plant_Disease_Identification_Using_Machine_Learning_Algorithms_on_Single-Board_Computers_in_IoT_Environments ;
+    kg:profession "No especificado" ;
+    kg:works 14 ;
+    foaf:name "George Routis" .
+
+author:Harish_Venu a kg:Author ;
+    kg:authored paper:Nanotechnology_and_LSTM_machine_learning_algorithms_in_advanced_fuel_spray_dynamics_in_CI_engines_with_different_bowl_geometries ;
+    kg:profession "No especificado" ;
+    kg:works 52 ;
+    foaf:name "Harish Venu" .
+
+author:Hua-Rong_Wei a kg:Author ;
+    kg:authored paper:Nanotechnology_and_LSTM_machine_learning_algorithms_in_advanced_fuel_spray_dynamics_in_CI_engines_with_different_bowl_geometries ;
+    kg:profession "No especificado" ;
+    kg:works 29 ;
+    foaf:name "Hua-Rong Wei" .
+
+author:Hüseyin_Şeker a kg:Author ;
+    kg:authored paper:Nanotechnology_and_LSTM_machine_learning_algorithms_in_advanced_fuel_spray_dynamics_in_CI_engines_with_different_bowl_geometries ;
+    kg:profession "No especificado" ;
+    kg:works 155 ;
+    foaf:name "Hüseyin Şeker" .
+
+author:Ioanna_Roussaki a kg:Author ;
+    kg:authored paper:Plant_Disease_Identification_Using_Machine_Learning_Algorithms_on_Single-Board_Computers_in_IoT_Environments ;
+    kg:profession "No especificado" ;
+    kg:works 71 ;
+    foaf:name "Ioanna Roussaki" .
+
+author:Jiaxin_Xu a kg:Author ;
+    kg:authored paper:Quality_over_Quantity__Boosting_Data_Efficiency_Through_Ensembled_Multimodal_Data_Curation ;
+    kg:profession "No especificado" ;
+    kg:works 330 ;
+    foaf:name "Jiaxin Xu" .
+
+author:Kangliang_Chen a kg:Author ;
+    kg:authored paper:Quality_over_Quantity__Boosting_Data_Efficiency_Through_Ensembled_Multimodal_Data_Curation ;
+    kg:profession "No especificado" ;
+    kg:works 1 ;
+    foaf:name "Kangliang Chen" .
+
+author:Manzoore_Elahi_M__Soudagar a kg:Author ;
+    kg:authored paper:Nanotechnology_and_LSTM_machine_learning_algorithms_in_advanced_fuel_spray_dynamics_in_CI_engines_with_different_bowl_geometries ;
+    kg:profession "No especificado" ;
+    kg:works 409 ;
+    foaf:name "Manzoore Elahi M. Soudagar" .
+
+author:Marios_Michailidis a kg:Author ;
+    kg:authored paper:Plant_Disease_Identification_Using_Machine_Learning_Algorithms_on_Single-Board_Computers_in_IoT_Environments ;
+    kg:profession "No especificado" ;
+    kg:works 8 ;
+    foaf:name "Marios Michailidis" .
+
+author:Minghua_Chen a kg:Author ;
+    kg:authored paper:Quality_over_Quantity__Boosting_Data_Efficiency_Through_Ensembled_Multimodal_Data_Curation ;
+    kg:profession "No especificado" ;
+    kg:works 459 ;
+    foaf:name "Minghua Chen" .
+
+author:Naif_Almakayeel a kg:Author ;
+    kg:authored paper:Nanotechnology_and_LSTM_machine_learning_algorithms_in_advanced_fuel_spray_dynamics_in_CI_engines_with_different_bowl_geometries ;
+    kg:profession "No especificado" ;
+    kg:works 55 ;
+    foaf:name "Naif Almakayeel" .
+
+author:Nornadiah_Mohd_Razali a kg:Author ;
+    kg:authored paper:Nanotechnology_and_LSTM_machine_learning_algorithms_in_advanced_fuel_spray_dynamics_in_CI_engines_with_different_bowl_geometries ;
+    kg:profession "No especificado" ;
+    kg:works 26 ;
+    foaf:name "Nornadiah Mohd Razali" .
+
+author:Qinya_Li a kg:Author ;
+    kg:authored paper:Quality_over_Quantity__Boosting_Data_Efficiency_Through_Ensembled_Multimodal_Data_Curation ;
+    kg:profession "No especificado" ;
+    kg:works 4 ;
+    foaf:name "Qinya Li" .
+
+author:T__M__Yunus_Khan a kg:Author ;
+    kg:authored paper:Nanotechnology_and_LSTM_machine_learning_algorithms_in_advanced_fuel_spray_dynamics_in_CI_engines_with_different_bowl_geometries ;
+    kg:profession "No especificado" ;
+    kg:works 350 ;
+    foaf:name "T. M. Yunus Khan" .
+
+author:Tiong_Sieh_Kiong a kg:Author ;
+    kg:authored paper:Nanotechnology_and_LSTM_machine_learning_algorithms_in_advanced_fuel_spray_dynamics_in_CI_engines_with_different_bowl_geometries ;
+    kg:profession "No especificado" ;
+    kg:works 391 ;
+    foaf:name "Tiong Sieh Kiong" .
+
+author:V__Dhana_Raju a kg:Author ;
+    kg:authored paper:Nanotechnology_and_LSTM_machine_learning_algorithms_in_advanced_fuel_spray_dynamics_in_CI_engines_with_different_bowl_geometries ;
+    kg:profession "No especificado" ;
+    kg:works 65 ;
+    foaf:name "V. Dhana Raju" .
+
+author:Weiwei_Zhao a kg:Author ;
+    kg:authored paper:Quality_over_Quantity__Boosting_Data_Efficiency_Through_Ensembled_Multimodal_Data_Curation ;
+    kg:profession "No especificado" ;
+    kg:works 477 ;
+    foaf:name "Weiwei Zhao" .
+
+author:Yuhao_Song a kg:Author ;
+    kg:authored paper:Quality_over_Quantity__Boosting_Data_Efficiency_Through_Ensembled_Multimodal_Data_Curation ;
+    kg:profession "No especificado" ;
+    kg:works 18 ;
+    foaf:name "Yuhao Song" .
+
+<http://knowledge-graph.org/paper/Nutritional_and_sensorial_analysis_of_a_lentil_flour-based_sweet_pancake_premix_[version_2;_peer_review__4_approved_with_reservations]> a kg:Paper ;
+    dc:date "2025-01-01" ;
+    dc:identifier "10.21956/openreseurope.20646.r49820" ;
+    dc:title "Nutritional and sensorial analysis of a lentil flour-based sweet pancake premix [version 2; peer review: 4 approved with reservations]" .
+
+paper:Plant_Disease_Identification_Using_Machine_Learning_Algorithms_on_Single-Board_Computers_in_IoT_Environments a kg:Paper ;
+    kg:hasAuthor author:George_Routis,
+        author:Ioanna_Roussaki,
+        author:Marios_Michailidis ;
+    kg:timesCited 12 ;
+    dc:date "2024-03-07" ;
+    dc:identifier "10.3390/electronics13061010" ;
+    dc:language "en" ;
+    dc:title "Plant Disease Identification Using Machine Learning Algorithms on Single-Board Computers in IoT Environments" .
+
+paper:Quality_over_Quantity__Boosting_Data_Efficiency_Through_Ensembled_Multimodal_Data_Curation a kg:Paper ;
+    kg:hasAuthor author:Daming_Wang,
+        author:Jiaxin_Xu,
+        author:Kangliang_Chen,
+        author:Minghua_Chen,
+        author:Qinya_Li,
+        author:Weiwei_Zhao,
+        author:Yuhao_Song ;
+    dc:date "2025-01-01" ;
+    dc:identifier "10.48550/arxiv.2502.08211" ;
+    dc:language "en" ;
+    dc:title "Quality over Quantity: Boosting Data Efficiency Through Ensembled Multimodal Data Curation" .
+
+paper:Nanotechnology_and_LSTM_machine_learning_algorithms_in_advanced_fuel_spray_dynamics_in_CI_engines_with_different_bowl_geometries a kg:Paper ;
+    kg:hasAuthor author:Armin_Rajabi,
+        author:Erdem_Cüce,
+        author:Harish_Venu,
+        author:Hua-Rong_Wei,
+        author:Hüseyin_Şeker,
+        author:Manzoore_Elahi_M__Soudagar,
+        author:Naif_Almakayeel,
+        author:Nornadiah_Mohd_Razali,
+        author:T__M__Yunus_Khan,
+        author:Tiong_Sieh_Kiong,
+        author:V__Dhana_Raju ;
+    kg:timesCited 2 ;
+    dc:date "2025-01-06" ;
+    dc:identifier "10.1038/s41598-024-83211-y" ;
+    dc:language "en" ;
+    dc:title "Nanotechnology and LSTM machine learning algorithms in advanced fuel spray dynamics in CI engines with different bowl geometries" .
+

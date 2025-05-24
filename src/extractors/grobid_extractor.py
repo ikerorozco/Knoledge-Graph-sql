@@ -175,7 +175,7 @@ def get_all_pdf_data():
     return all_pdf_data
 
 
-def generar_embeddings_y_similitud(pdfs_extraidos, papers_objetos=None, umbral=0.05):
+def generar_embeddings_y_similitud(pdfs_extraidos, papers_objetos=None, umbral=0.30):
     abstracts = [pdf["abstract"] for pdf in pdfs_extraidos]
     nombres_pdf = [pdf["filename"] for pdf in pdfs_extraidos]
 
@@ -190,6 +190,7 @@ def generar_embeddings_y_similitud(pdfs_extraidos, papers_objetos=None, umbral=0
             if matriz_similitud[i][j] > umbral:
                 # Agregar el paper similar a la lista papersSimilares de ambos papers
                 if papers_objetos:
+                    print(f"Agregando paper similar {papers_objetos[j].title} a {papers_objetos[i].title} con similitud {matriz_similitud[i][j]}")
                     papers_objetos[i].papersSimilares.append(papers_objetos[j])
                     papers_objetos[j].papersSimilares.append(papers_objetos[i])
 
