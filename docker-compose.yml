@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  grobid:
+    image: lfoppiano/grobid:0.8.1
+    ports:
+      - "8070:8070"
+    restart: unless-stopped
+    volumes:
+      - data:/grobid/data  # opcional, si grobid usa data
+
+  app:
+    build: .
+    ports:
+      - "8501:8501"       # puerto de Streamlit
+    depends_on:
+      - grobid
+    environment:
+      - GROBID_URL=http://grobid:8070/api/processFulltextDocument
+      - GROBID_ALIVE=http://grobid:8070/api/health
+    volumes:
+      - ./data:/app/data  # si necesitas volumen para datos
+
+volumes:
+  data:
