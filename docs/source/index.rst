@@ -1,37 +1,37 @@
-.. Knowledge Graph SQL documentation master file, created by
-   sphinx-quickstart on Tue May 27 09:19:27 2025.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+.. Archivo maestro de documentación de Knowledge Graph SQL, creado por
+   sphinx-quickstart el martes 27 de mayo de 2025.
+   Puedes adaptar este archivo completamente a tu gusto, pero al menos debería
+   contener la directiva raíz `toctree`.
 
-Knowledge Graph SQL documentation
-=================================
+Documentación de Knowledge Graph SQL
+=====================================
 
-Introduction
+Introducción
 ------------
-This project is designed to create and manage a knowledge graph using SQL databases. It provides tools for extracting, enriching, and visualizing data from academic papers and related projects.
+Este proyecto está diseñado para crear y gestionar un grafo de conocimiento utilizando bases de datos SQL. Proporciona herramientas para extraer, enriquecer y visualizar datos de artículos académicos y proyectos relacionados.
 
-Installation
+Instalación
 ------------
-To install and run this project, you can use Docker or set up a Python environment.
+Para instalar y ejecutar este proyecto, puedes usar Docker o configurar un entorno Python.
 
-Using Docker:
-- Ensure you have Docker and Docker Compose installed on your system.
-- Run `docker-compose up --build` to build and start the services.
+Usando Docker:
+- Asegúrate de tener Docker y Docker Compose instalados en tu sistema.
+- Ejecuta `docker-compose up --build` para construir e iniciar los servicios.
 
-Using Python Environment:
-- Create a virtual environment: `python -m venv env`
-- Activate the virtual environment: `source env/bin/activate`
-- Install dependencies: `pip install -r requirements.txt`
+Usando Entorno Python:
+- Crea un entorno virtual: `python -m venv env`
+- Activa el entorno virtual: `source env/bin/activate`
+- Instala las dependencias: `pip install -r requirements.txt`
 
-Usage
------
-After installation, you can run the main application using:
-- `python src/main.py` for direct execution.
-- Access the Streamlit app by running `streamlit run src/app.py`.
+Uso
+---
+Después de la instalación, puedes ejecutar la aplicación principal usando:
+- `python src/main.py` para ejecución directa.
+- Accede a la aplicación Streamlit ejecutando `streamlit run src/app.py`.
 
-Results
--------
-The application will generate a knowledge graph that can be visualized and exported to RDF format. The Streamlit app provides interactive views for exploring the data.
+Resultados
+----------
+La aplicación generará un grafo de conocimiento que puede ser visualizado y exportado al formato RDF. La aplicación Streamlit proporciona vistas interactivas para explorar los datos.
 
 .. toctree::
    :maxdepth: 2
