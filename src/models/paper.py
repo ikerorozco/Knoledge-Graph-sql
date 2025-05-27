@@ -1,6 +1,6 @@
 from typing import Optional, List
-from .author import Author
-from .organization import Organization
+from models.author import Author
+from models.organization import Organization
 
 
 class Paper:
