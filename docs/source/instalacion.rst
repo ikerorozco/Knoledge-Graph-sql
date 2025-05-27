@@ -6,26 +6,26 @@ Usando Docker:
 - Asegúrate de tener Docker y Docker Compose instalados en tu sistema.
 - Ejecuta::
 
-  .. code-block:: bash
+.. code-block:: bash
 
     docker-compose up --build
 
 Usando el entorno de Python:
 - Crea un entorno virtual::
 
-  .. code-block:: bash
+.. code-block:: bash
 
     python -m venv env
 
 - Activa el entorno virtual::
 
-  .. code-block:: bash
+.. code-block:: bash
 
     source env/bin/activate
 
 - Instala las dependencias::
 
-  .. code-block:: bash
+.. code-block:: bash
 
     pip install -r requirements.txt
 

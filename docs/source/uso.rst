@@ -5,7 +5,7 @@ Después de la instalación, puedes ejecutar la aplicación principal usando:
 
 - Accede a la aplicación Streamlit ejecutando::
 
-  .. code-block:: bash
+.. code-block:: bash
 
     streamlit run src/app.py
 
