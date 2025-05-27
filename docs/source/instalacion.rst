@@ -1,32 +1,34 @@
 Instalación
 ===========
+
 Para instalar y ejecutar este proyecto, puedes usar Docker o configurar un entorno de Python.
 
-Usando Docker:
-- Asegúrate de tener Docker y Docker Compose instalados en tu sistema.
-- Ejecuta::
+**Usando Docker**
+
+Asegúrate de tener Docker y Docker Compose instalados en tu sistema. Luego, ejecuta:
 
 .. code-block:: bash
 
-    docker-compose up --build
+   docker-compose up --build
 
-Usando el entorno de Python:
-- Crea un entorno virtual::
+**Usando el entorno de Python**
 
-.. code-block:: bash
+1. Crea un entorno virtual:
 
-    python -m venv env
+   .. code-block:: bash
 
-- Activa el entorno virtual::
+      python -m venv env
 
-.. code-block:: bash
+2. Activa el entorno virtual:
 
-    source env/bin/activate
+   .. code-block:: bash
 
-- Instala las dependencias::
+      source env/bin/activate
 
-.. code-block:: bash
+3. Instala las dependencias:
 
-    pip install -r requirements.txt
+   .. code-block:: bash
 
-Asegúrate de que todos los servicios necesarios, como GROBID, estén configurados y ejecutándose antes de iniciar la aplicación principal. 
+      pip install -r requirements.txt
+
+Asegúrate de que todos los servicios necesarios, como GROBID, estén configurados y ejecutándose antes de iniciar la aplicación principal.
