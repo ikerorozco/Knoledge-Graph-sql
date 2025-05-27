@@ -1,3 +1,5 @@
 Introducción
 ============
-Este proyecto está diseñado para crear y gestionar un grafo de conocimiento utilizando bases de datos SQL. Proporciona herramientas para extraer, enriquecer y visualizar datos de artículos académicos y proyectos relacionados. 
+Este proyecto tiene como objetivo construir un grafo de conocimiento académico a partir de artículos científicos en formato PDF. El flujo de trabajo inicia con la extracción automática de información básica desde los archivos PDF mediante el servicio Grobid. Posteriormente, esta información se enriquece con datos adicionales provenientes de las plataformas OpenAIRE y OpenAlex, lo que permite vincular autores, organizaciones, proyectos y otras entidades relevantes.
+
+A continuación, se realiza un análisis semántico de los resúmenes (abstracts) utilizando modelos de lenguaje de Hugging Face, con el fin de identificar similitudes temáticas entre los diferentes papers. Esta información se utiliza para construir un grafo de conocimiento estructurado, que integra relaciones entre publicaciones, autores, instituciones y proyectos. 
