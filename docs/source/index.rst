@@ -128,7 +128,7 @@ Visión General
 
    .. code-block:: bash
 
-      git clone <repository-url>
+      git clone https://github.com/ikerorozco/Knoledge-Graph-sql
       cd Knowledge-Graph-SQL
       docker-compose up --build
 
