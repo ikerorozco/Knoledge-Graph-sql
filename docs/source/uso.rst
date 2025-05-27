@@ -5,9 +5,9 @@ Después de la instalación, puedes ejecutar la aplicación principal usando:
 
 - Accede a la aplicación Streamlit ejecutando::
 
-  ```
-  streamlit run src/app.py
-  ```
+  .. code-block:: bash
+
+    streamlit run src/app.py
 
 La aplicación Streamlit ofrece varias vistas para interactuar con el grafo, incluyendo:
 - Red Interactiva: Visualiza el grafo de conocimiento con nodos y relaciones.

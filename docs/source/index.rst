@@ -18,28 +18,28 @@ Usando Docker:
 - Asegúrate de tener Docker y Docker Compose instalados en tu sistema.
 - Ejecuta::
 
-  ```
-  docker-compose up --build
-  ```
+  .. code-block:: bash
+
+    docker-compose up --build
 
 Usando Entorno Python:
 - Crea un entorno virtual::
 
-  ```
-  python -m venv env
-  ```
+  .. code-block:: bash
+
+    python -m venv env
 
 - Activa el entorno virtual::
 
-  ```
-  source env/bin/activate
-  ```
+  .. code-block:: bash
+
+    source env/bin/activate
 
 - Instala las dependencias::
 
-  ```
-  pip install -r requirements.txt
-  ```
+  .. code-block:: bash
+
+    pip install -r requirements.txt
 
 Uso
 ---
@@ -47,9 +47,9 @@ Después de la instalación, puedes ejecutar la aplicación principal usando:
 - `python src/main.py` para ejecución directa.
 - Accede a la aplicación Streamlit ejecutando::
 
-  ```
-  streamlit run src/app.py
-  ```
+  .. code-block:: bash
+
+    streamlit run src/app.py
 
 Resultados
 ----------
