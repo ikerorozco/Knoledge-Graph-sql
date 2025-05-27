@@ -1,0 +1,38 @@
+{
+    "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
+    "@type": "SoftwareSourceCode",
+    "name": "Knoledge Graph",
+    "description": "Recibe papers, enriquece la información usando OpenAlex y OpenAIRE, y genera un grafo de conocimiento.",
+    "version": "1.0.0",
+    "datePublished": "2025-05-27",
+    "codeRepository": "https://github.com/ikerorozco/Knoledge-Graph-sql/",
+    "license": "https://www.gnu.org/licenses/gpl-3.0.en.html",
+    "author": [
+      {
+        "@type": "Person",
+        "givenName": "Iker",
+        "familyName": "Orozco"
+      },
+      {
+        "@type": "Person",
+        "givenName": "Andrea",
+        "familyName": "Galindo"
+      },
+      {
+        "@type": "Person",
+        "givenName": "Sergio",
+        "familyName": "Gonzalez"
+      }
+    ],
+    "programmingLanguage": "Python",
+    "operatingSystem": "All",
+    "keywords": [
+      "graph knowledge",
+      "OpenAIRE",
+      "OpenAlex",
+      "scientific papers",
+      "data enrichment",
+      "knowledge extraction"
+    ]
+  }
+  
