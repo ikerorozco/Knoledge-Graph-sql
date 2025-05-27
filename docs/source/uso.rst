@@ -1,17 +1,36 @@
+===
 Uso
 ===
-Después de la instalación, puedes ejecutar la aplicación principal usando:
-- `python src/main.py` para iniciar el proceso de extracción y enriquecimiento de datos desde los PDFs.
 
-- Accede a la aplicación Streamlit ejecutando::
 
-.. code-block:: bash
+🖥️ Interfaz de Usuario
+======================
 
-    streamlit run src/app.py
+Navegación Principal
+--------------------
 
-La aplicación Streamlit ofrece varias vistas para interactuar con el grafo, incluyendo:
-- Red Interactiva: Visualiza el grafo de conocimiento con nodos y relaciones.
-- Autores por Paper: Muestra los autores asociados a cada publicación.
-- Buscador de Papers: Permite buscar publicaciones por palabras clave en sus títulos.
-- Línea de Tiempo de Proyectos: Presenta un diagrama de Gantt de los proyectos.
-- Mapa de Organizaciones: Muestra un mapa geográfico de las organizaciones involucradas. 
+La aplicación está organizada en pestañas principales accesibles desde la barra lateral:
+
+.. list-table::
+   :widths: 20 80
+   :header-rows: 1
+
+   * - Pestaña
+     - Funcionalidad
+   * - 🏠 **Dashboard**
+     - Vista general con estadísticas y métricas del grafo
+   * - 📤 **Carga de Datos**
+     - Subir y procesar documentos PDF
+   * - 🕸️ **Red Interactiva**
+     - Visualización principal del grafo de conocimiento
+   * - 👥 **Autores**
+     - Exploración de autores y colaboraciones
+   * - 🔍 **Búsqueda**
+     - Motor de búsqueda de papers y entidades
+   * - 📊 **Análisis**
+     - Herramientas de análisis y métricas avanzadas
+   * - 🗺️ **Mapa Geográfico**
+     - Distribución geográfica de instituciones
+   * - 📅 **Línea de Tiempo**
+     - Evolución temporal de proyectos y publicaciones
+
