@@ -30,7 +30,7 @@ templates_path = ['_templates']
 exclude_patterns = []
 
 # Configuración de autoapi para extraer documentación de src/
-autoapi_dirs = ["../src"]  # Asegúrate de que esta ruta es correcta
+autoapi_dirs = ["../../src"]  # Asegúrate de que esta ruta es correcta
 
 language = 'es'
 
