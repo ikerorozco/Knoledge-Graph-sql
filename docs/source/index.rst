@@ -6,14 +6,8 @@
 Knowledge Graph - Documentación
 ===========================================
 
-.. image:: ../../knowledge_graph.png
-   :alt: Knowledge Graph SQL
-   :align: center
-   :width: 600px
 
-|
-
-.. centered:: **Construcción de Grafos de Conocimiento Académico mediante Procesamiento Inteligente de Documentos PDF**
+.. centered:: **Construcción de Grafos de Conocimiento Académico mediante Procesamiento de Documentos PDF**
 
 ----
 
