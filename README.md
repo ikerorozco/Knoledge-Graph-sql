@@ -1,18 +1,4 @@
-# Knowledge Graph SQL
-
-
-## 📋 Tabla de Contenidos
-- [Introducción](#introducción)
-- [Características](#características)
-- [Arquitectura del Proyecto](#arquitectura-del-proyecto)
-- [Instalación](#instalación)
-- [Uso](#uso)
-- [Estructura del Proyecto](#estructura-del-proyecto)
-- [Dependencias](#dependencias)
-- [Documentación](#documentación)
-- [Contribución](#contribución)
-- [Licencia](#licencia)
-- [Autores](#autores)
+# Knowledge Graph
 
 ## 🎯 Introducción
 
@@ -72,7 +58,7 @@ Asegúrate de tener **Docker** y **Docker Compose** instalados en tu sistema.
 
 ```bash
 # Clonar el repositorio
-git clone <repository-url>
+git clone https://github.com/ikerorozco/Knoledge-Graph-sql/
 cd Knowledge-Graph-SQL
 
 # Ejecutar con Docker Compose
@@ -83,7 +69,7 @@ docker-compose up --build
 
 ```bash
 # Clonar el repositorio
-git clone <repository-url>
+git clone https://github.com/ikerorozco/Knoledge-Graph-sql/
 cd Knowledge-Graph-SQL
 
 # Crear entorno virtual
@@ -198,4 +184,4 @@ Este proyecto está bajo la licencia especificada en el archivo `LICENSE`.
 
 **Versión**: 1.0.0  
 **Estado**: Activo  
-**Documentación**: [ReadTheDocs](https://knowledge-graph-sql.readthedocs.io/)
+**Documentación**: [ReadTheDocs](https://knoledge-graph.readthedocs.io/es/latest/index.html)
