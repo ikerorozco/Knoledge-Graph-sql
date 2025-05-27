@@ -2,7 +2,12 @@ Uso
 ===
 Después de la instalación, puedes ejecutar la aplicación principal usando:
 - `python src/main.py` para iniciar el proceso de extracción y enriquecimiento de datos desde los PDFs.
-- Accede a la aplicación Streamlit ejecutando `streamlit run src/app.py` para explorar el grafo de conocimiento de forma interactiva.
+
+- Accede a la aplicación Streamlit ejecutando::
+
+  ```
+  streamlit run src/app.py
+  ```
 
 La aplicación Streamlit ofrece varias vistas para interactuar con el grafo, incluyendo:
 - Red Interactiva: Visualiza el grafo de conocimiento con nodos y relaciones.
