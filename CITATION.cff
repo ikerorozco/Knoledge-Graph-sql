@@ -1,0 +1,104 @@
+cff-version: 1.2.0
+message: "Si usas este software, por favor cítalo como se indica a continuación."
+type: software
+title: "Knowledge Graph SQL: Construcción de Grafos de Conocimiento Académico"
+abstract: >-
+  Una plataforma avanzada de procesamiento de documentos académicos que 
+  transforma artículos científicos en formato PDF en un grafo de conocimiento 
+  estructurado y navegable. La aplicación combina técnicas de extracción de 
+  información, análisis semántico y visualización interactiva para crear una 
+  representación rica de las relaciones entre publicaciones, autores, 
+  instituciones y proyectos de investigación.
+
+authors:
+  - family-names: "Orozco"
+    given-names: "Iker"
+    orcid: "https://orcid.org/0000-0000-0000-0000"  # Actualizar con ORCID real
+    affiliation: "Universidad"
+    email: "iker.orozco@example.com"  # Actualizar con email real
+  - family-names: "Galindo"
+    given-names: "Andrea"
+    orcid: "https://orcid.org/0000-0000-0000-0000"  # Actualizar con ORCID real
+    affiliation: "Universidad"
+    email: "andrea.galindo@example.com"  # Actualizar con email real
+  - family-names: "González Mateus"
+    given-names: "Sergio Andrés"
+    orcid: "https://orcid.org/0000-0000-0000-0000"  # Actualizar con ORCID real
+    affiliation: "Universidad"
+    email: "sergio.gonzalez@example.com"  # Actualizar con email real
+
+repository-code: "https://github.com/ikerorozco/Knoledge-Graph-sql"
+url: "https://knowledge-graph-sql.readthedocs.io"
+doi: "10.5281/zenodo.15529403"
+version: "1.0.0"
+date-released: "2025-01-24"
+license: "MIT"  # Ajustar según la licencia real del proyecto
+
+keywords:
+  - "knowledge graph"
+  - "academic documents"
+  - "scientific literature"
+  - "semantic analysis"
+  - "bibliometrics"
+  - "network analysis"
+  - "machine learning"
+  - "natural language processing"
+  - "pdf processing"
+  - "grobid"
+  - "streamlit"
+  - "rdf"
+  - "openaire"
+  - "openalex"
+
+references:
+  - type: software
+    title: "Grobid"
+    authors:
+      - family-names: "Lopez"
+        given-names: "Patrice"
+    url: "https://github.com/kermitt2/grobid"
+    notes: "Machine learning library for extracting and parsing bibliographic information from scholarly documents"
+  
+  - type: software
+    title: "Sentence Transformers"
+    authors:
+      - family-names: "Reimers"
+        given-names: "Nils"
+      - family-names: "Gurevych"
+        given-names: "Iryna"
+    url: "https://github.com/UKPLab/sentence-transformers"
+    notes: "Framework for state-of-the-art sentence, text and image embeddings"
+  
+  - type: dataset
+    title: "OpenAlex"
+    authors:
+      - name: "OurResearch"
+    url: "https://openalex.org"
+    notes: "Open catalog of scholarly works, authors, venues, institutions, and concepts"
+  
+  - type: dataset
+    title: "OpenAIRE"
+    authors:
+      - name: "OpenAIRE Consortium"
+    url: "https://www.openaire.eu"
+    notes: "European scholarly communication infrastructure"
+
+contact:
+  - family-names: "Orozco"
+    given-names: "Iker"
+
+preferred-citation:
+  type: software
+  title: "Knowledge Graph: Construcción de Grafos de Conocimiento Académico"
+  authors:
+    - family-names: "Orozco"
+      given-names: "Iker"
+    - family-names: "Galindo"
+      given-names: "Andrea"
+    - family-names: "González"
+      given-names: "Sergio Andrés"
+  version: "1.0.0"
+  doi: "10.5281/zenodo.15529403"
+  date-released: "2025-01-24"
+  repository-code: "https://github.com/ikerorozco/Knoledge-Graph-sql"
+  url: "https://knowledge-graph-sql.readthedocs.io" 
