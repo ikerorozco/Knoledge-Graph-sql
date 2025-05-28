@@ -10,9 +10,17 @@ from views.graph_view   import show_graph
 from views.consultas_view  import show_authors_by_paper, show_paper_search
 from views.map_view     import show_org_map
 from views.timeline     import show_project_timeline, show_publications_by_year
+from views.similarity import ver_papers_similares
 
 st.set_page_config(page_title="Explorador KG", layout="wide")
 st.title("🔍 Explorador de Knowledge Graph")
+
+@st.cache_data
+def load_papers():
+    import pickle
+    with open("data/papers_con_similitud.pkl", "rb") as f:
+        return pickle.load(f)
+
 
 @st.cache_data
 def load_graph(path="data/graphs/knowledge_graph.ttl"):
@@ -27,7 +35,8 @@ page = st.sidebar.selectbox("📑 Navegación", [
     "Autores por Paper",
     "Buscador de Papers",
     "Línea de Tiempo de Proyectos",
-    "Mapa de Organizaciones"
+    "Mapa de Organizaciones",
+    "Explorador de Similitud"
 ])
 
 if page == "Red Interactiva":
@@ -45,5 +54,10 @@ elif page == "Línea de Tiempo de Proyectos":
 
 elif page == "Mapa de Organizaciones":
     show_org_map(g)
+
+elif page == "Explorador de Similitud":
+    papers = load_papers()
+    ver_papers_similares(papers)
+
 
 

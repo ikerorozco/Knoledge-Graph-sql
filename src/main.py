@@ -1,3 +1,4 @@
+import pickle
 from api.openaire_api import buscar_por_titulo as buscar_openaire
 from api.openaire_api import buscar_organizacion, completar_paper_con_openaire, buscar_proyectos_asociados_paper
 from api.openalex_api import buscar_por_titulo_openalex
@@ -102,7 +103,9 @@ if __name__ == "__main__":
     
     # Generar embeddings y similitud entre papers
     generar_embeddings_y_similitud(get_all_pdf_data(), papers_objetos=papers)
-    
+    with open("data/papers_con_similitud.pkl", "wb") as f:
+        pickle.dump(papers, f)
+
     # Crear el grafo de conocimiento
     kg = create_knowledge_graph(papers, proyectos)
     
@@ -116,3 +119,6 @@ if __name__ == "__main__":
     rdf_file_path = "data/graphs/knowledge_graph.ttl"  # Formato Turtle RDF
     kg.export_to_rdf(rdf_file_path)
     print(f"Grafo exportado a RDF en: {rdf_file_path}")
+
+
+    
