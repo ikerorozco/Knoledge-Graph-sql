@@ -1,5 +1,6 @@
 # app.py
 import os
+import subprocess
 import streamlit as st
 import streamlit.components.v1 as components
 from rdflib import Graph
@@ -14,6 +15,16 @@ from views.similarity import ver_papers_similares
 
 st.set_page_config(page_title="Explorador KG", layout="wide")
 st.title("🔍 Explorador de Knowledge Graph")
+
+@st.cache_data
+def ensure_data():
+    data_file = "data/papers_con_similitud.pkl"
+    
+    if not os.path.exists(data_file):
+        st.warning("Generando datos por primera vez... esto puede tardar unos minutos.")
+        subprocess.run(["python", "main.py"])
+        
+    return True
 
 @st.cache_data
 def load_papers():
@@ -56,6 +67,7 @@ elif page == "Mapa de Organizaciones":
     show_org_map(g)
 
 elif page == "Explorador de Similitud":
+    ensure_data()
     papers = load_papers()
     ver_papers_similares(papers)
 

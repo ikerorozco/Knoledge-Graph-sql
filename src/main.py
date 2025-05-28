@@ -104,7 +104,7 @@ if __name__ == "__main__":
     # Generar embeddings y similitud entre papers
     generar_embeddings_y_similitud(get_all_pdf_data(), papers_objetos=papers)
     with open("data/papers_con_similitud.pkl", "wb") as f:
-        pickle.dump(papers, f)
+        pickle.dump(papers, f)  
 
     # Crear el grafo de conocimiento
     kg = create_knowledge_graph(papers, proyectos)

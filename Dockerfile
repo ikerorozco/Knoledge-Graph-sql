@@ -15,4 +15,5 @@ COPY src/ ./src/
 EXPOSE 8501
 
 # Comando para ejecutar Streamlit con la app
+CMD [ "Python","src/main.py" ]
 CMD ["streamlit", "run", "src/app.py", "--server.port=8501", "--server.address=0.0.0.0"]
